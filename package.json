@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "mapbox-gl": "^2.8.2"
+  },
+  "devDependencies": {
+    "file-loader": "^6.2.0",
+    "os-browserify": "^0.3.0"
+  }
+}
