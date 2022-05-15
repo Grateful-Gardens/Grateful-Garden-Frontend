@@ -1,30 +1,13 @@
-import './App.css';
-import NavBar from './components/navBar';
-import Posts from './components/post';
-import Link from './components/link';
-import Friends from './components/friends';
-
-
+import Home from './pages/home/Home.jsx'
+// import Login from "./pages/login/Login";
+// import Profile from "./pages/profile/Profile";
+// import Register from "./pages/register/Register";
+import './App.css'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <NavBar/>
-      </header>
-
-      <div>
-        <Link/>
-      </div>
-
-      <div>
-        <Posts/>
-      </div>
-     
-     <div>
-       <Friends/>
-     </div>
-     
+    <div>
+      <Home/>
     </div>
   );
 }
