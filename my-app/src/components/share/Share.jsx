@@ -6,9 +6,28 @@ import { PermMedia, Label, Room, EmojiEmotions } from "@mui/icons-material";
 export default function Share() {
   const [input, setInput] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(input);
+
+    const trial = {
+      hashtag: 'Excitement',
+      image: '',
+      description: 'This is my first post!',
+      user_id: 1
+    }
+
+    const result = await fetch("http://localhost:9001/posts", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(trial)
+    })
+
+    const parsed = await result.json()
+    console.log(parsed)
+
   };
 
   const handleInputChange = (e) => {
