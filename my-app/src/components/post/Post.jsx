@@ -2,18 +2,26 @@ import React from "react";
 import "./post.css";
 import { Users } from "../../dummyData";
 import { useState } from "react";
-import { MoreVert} from "@mui/icons-material";
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import FavoriteBorderTwoToneIcon from '@mui/icons-material/FavoriteBorderTwoTone';
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
+// import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 
 export default function Post({ post }) {
   const [like, setLike] = useState(post.like);
   const [isLiked, setIsLiked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
+
+  const handleBookmark = () => {
+    !isBookmarked ? setIsBookmarked(true) : setIsBookmarked(false);
+    console.log(isBookmarked);
+  };
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -21,8 +29,8 @@ export default function Post({ post }) {
           <div className="postTopLeft">
             <img
               className="postProfileImg"
-            //   src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
-                src="https://www.northernbeachesreview.com.au/images/transform/v1/crop/frm/jess.wallace/8b0a371c-1e18-4bd5-bf78-0a4aed88cc6f.jpg/r0_0_7359_4906_w1200_h678_fmax.jpg"
+              //   src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
+              src="https://www.northernbeachesreview.com.au/images/transform/v1/crop/frm/jess.wallace/8b0a371c-1e18-4bd5-bf78-0a4aed88cc6f.jpg/r0_0_7359_4906_w1200_h678_fmax.jpg"
               alt=""
             />
             <span className="postUsername">
@@ -31,13 +39,16 @@ export default function Post({ post }) {
             <span className="postDate">{post.date}</span>
           </div>
           <div className="postTopRight">
-            <MoreVert />
+            <BookmarkAddOutlinedIcon onClick={handleBookmark} />
           </div>
+          {/* <div className="postTopRight">
+            <BookmarkAddedIcon onClick={handleBookmark} />
+          </div> */}
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          {/* <img className="postImg" src={post.photo} alt="" /> */}
-          <img className="postImg" src="https://www.northernbeachesreview.com.au/images/transform/v1/crop/frm/jess.wallace/8b0a371c-1e18-4bd5-bf78-0a4aed88cc6f.jpg/r0_0_7359_4906_w1200_h678_fmax.jpg" alt="" />
+          <img className="postImg" src={post.photo} alt="" />
+          {/* <img className="postImg" src="https://www.northernbeachesreview.com.au/images/transform/v1/crop/frm/jess.wallace/8b0a371c-1e18-4bd5-bf78-0a4aed88cc6f.jpg/r0_0_7359_4906_w1200_h678_fmax.jpg" alt="" /> */}
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
@@ -53,8 +64,16 @@ export default function Post({ post }) {
               onClick={likeHandler}
               alt=""
             /> */}
-            <FavoriteBorderTwoToneIcon htmlColor="green" className="likeIcon" onClick={likeHandler}/>
-            <ThumbUpAltIcon htmlColor="green" className="likeIcon" onClick={likeHandler}/>
+            <FavoriteBorderTwoToneIcon
+              htmlColor="#2e7865"
+              className="likeIcon"
+              onClick={likeHandler}
+            />
+            <ThumbUpAltIcon
+              htmlColor="#2e7865"
+              className="likeIcon"
+              onClick={likeHandler}
+            />
             <span className="postLikeCounter">{like} people like it</span>
           </div>
           <div className="postBottomRight">
