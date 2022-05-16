@@ -1,11 +1,16 @@
 import React from "react";
 import "./topbar.css";
-import Search from '@mui/icons-material/Search';
-import Person from '@mui/icons-material/Person';
-import Chat from '@mui/icons-material/Chat';
-import Notifications from '@mui/icons-material/Notifications';
+import Search from "@mui/icons-material/Search";
+import Person from "@mui/icons-material/Person";
+import Chat from "@mui/icons-material/Chat";
+import Notifications from "@mui/icons-material/Notifications";
+import { Link } from "react-router-dom";
 
 export default function Topbar() {
+  function handleProfileClick() {
+    console.log("Profile");
+  }
+
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -22,8 +27,12 @@ export default function Topbar() {
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
-          <span className="topbarLink">Homepage</span>
-          <span className="topbarLink">Timeline</span>
+          <Link to="/">
+            <span className="topbarLink">Homepage</span>
+          </Link>
+          <Link to="/login">
+            <span className="topbarLink">Sign Out</span>
+          </Link>
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
@@ -39,7 +48,14 @@ export default function Topbar() {
             <span className="topbarIconBadge">1</span>
           </div>
         </div>
-        <img src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" alt="" className="topbarImg"/>
+        <Link to="/profile">
+          <img
+            src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
+            alt=""
+            className="topbarImg"
+            onClick={handleProfileClick}
+          />
+        </Link>
       </div>
     </div>
   );
