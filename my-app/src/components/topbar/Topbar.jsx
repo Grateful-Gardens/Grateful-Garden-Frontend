@@ -2,7 +2,7 @@ import React from "react";
 import "./topbar.css";
 import Search from "@mui/icons-material/Search";
 import Person from "@mui/icons-material/Person";
-import Chat from "@mui/icons-material/Chat";
+// import Chat from "@mui/icons-material/Chat";
 import Notifications from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
 
@@ -39,10 +39,10 @@ export default function Topbar() {
             <Person />
             <span className="topbarIconBadge">1</span>
           </div>
-          <div className="topbarIconItem">
+          {/* <div className="topbarIconItem">
             <Chat />
             <span className="topbarIconBadge">2</span>
-          </div>
+          </div> */}
           <div className="topbarIconItem">
             <Notifications />
             <span className="topbarIconBadge">1</span>
