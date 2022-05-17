@@ -5,33 +5,39 @@ import { PermMedia, Label, Room, EmojiEmotions } from "@mui/icons-material";
 
 export default function Share() {
   const [input, setInput] = useState("");
+  const [hashtag, setHashtag] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(input);
 
     const trial = {
-      hashtag: 'Excitement',
-      image: '',
-      description: 'This is my first post!',
-      user_id: 1
-    }
+      hashtag: hashtag,
+      image: "",
+      description: input,
+      user_id: 1,
+    };
 
     const result = await fetch("http://localhost:9001/posts", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(trial)
-    })
+      body: JSON.stringify(trial),
+    });
+    const parsed = await result.json();
+    console.log(parsed);
 
-    const parsed = await result.json()
-    console.log(parsed)
-
+    setInput("");
   };
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
+  };
+
+  const handleHashtagClick = (e) => {
+    setHashtag(e.target.value);
+    console.log(hashtag);
   };
 
   return (
@@ -59,8 +65,27 @@ export default function Share() {
               <span className="shareOptionText">Photo</span>
             </div>
             <div className="shareOption">
-              <Label htmlColor="blue" className="shareIcon" />
-              <span className="shareOptionText">Tag</span>
+              <div className="dropdown">
+                <Label htmlColor="blue" className="shareIcon" />
+                <span className="shareOptionText">Tag</span>
+                <div className="dropdown-content">
+                  <option value="Green" onClick={handleHashtagClick}>
+                    Green
+                  </option>
+                  <option value="Love" onClick={handleHashtagClick}>
+                    Love
+                  </option>
+                  <option value="Hope" onClick={handleHashtagClick}>
+                    Hope
+                  </option>
+                  <option value="Grateful" onClick={handleHashtagClick}>
+                    Grateful
+                  </option>
+                  <option value="Garden" onClick={handleHashtagClick}>
+                    Gardens
+                  </option>
+                </div>
+              </div>
             </div>
             <div className="shareOption">
               <Room htmlColor="green" className="shareIcon" />
