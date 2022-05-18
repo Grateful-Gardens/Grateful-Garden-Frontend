@@ -4,13 +4,12 @@ import "./share.css";
 import { PermMedia, Label, Room, EmojiEmotions } from "@mui/icons-material";
 import SendSharpIcon from '@mui/icons-material/SendSharp';
 
-export default function Share() {
+export default function Share(props) {
   const [input, setInput] = useState("");
   const [hashtag, setHashtag] = useState("");
   const [user, setUser] = useState(1);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const createPost = async (e) => {
     if (input === "") return
 
     const trial = {
@@ -28,8 +27,8 @@ export default function Share() {
       body: JSON.stringify(trial),
     });
     const parsed = await result.json();
-    console.log(parsed);
-
+    console.log()
+    props.setPosts([parsed.data[0], ...props.post])
     setInput("");
   };
 
@@ -97,7 +96,7 @@ export default function Share() {
               <span className="shareOptionText">Feelings</span>
             </div>
           </div>
-            <SendSharpIcon className='shareButton' htmlColor="#2e7865" onClick={handleSubmit}/>
+            <SendSharpIcon className='shareButton' htmlColor="#2e7865" onClick={createPost}/>
         </div>
       </div>
     </div>

@@ -12,12 +12,13 @@ export default function Feed() {
       .then((data) => setPosts(data.data));
   }, []);
 
+
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share />
+        <Share post={posts} setPosts={setPosts}/>
         {posts.map((p) => (
-          <Post key={p.post_id} post={p} />
+          <Post key={p.post_id} post={p} setPosts={setPosts}/>
         ))}
       </div>
     </div>

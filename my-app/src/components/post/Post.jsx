@@ -5,14 +5,14 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import { DateTime } from "luxon";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 // import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 
-export default function Post({ post }) {
+export default function Post({ post, setPosts }) {
   const [like, setLike] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const [comments, setComments] = useState(1)
+  const [comments, setComments] = useState(1);
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -32,10 +32,8 @@ export default function Post({ post }) {
           "Content-Type": "application/json",
         },
       });
-      const resData = "resource deleted...";
-      return resData;
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
@@ -56,7 +54,7 @@ export default function Post({ post }) {
             </span>
           </div>
           <div className="postTopRight">
-            <DeleteIcon type="submit" onClick={handleDelete}/>
+            <DeleteIcon type="submit" onClick={handleDelete} />
             <BookmarkAddOutlinedIcon onClick={handleBookmark} />
           </div>
           {/* <div className="postTopRight">
