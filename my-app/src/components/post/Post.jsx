@@ -8,7 +8,7 @@ import { DateTime } from "luxon";
 import DeleteIcon from "@mui/icons-material/Delete";
 // import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 
-export default function Post({ post, setPosts }) {
+export default function Post({ post, posts, setPosts }) {
   const [like, setLike] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -24,7 +24,7 @@ export default function Post({ post, setPosts }) {
   };
 
   const handleDelete = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
       await fetch(`http://localhost:9001/posts/${post.post_id}`, {
         method: "DELETE",
@@ -32,8 +32,10 @@ export default function Post({ post, setPosts }) {
           "Content-Type": "application/json",
         },
       });
-    } catch (err) {
-      console.log(err);
+      const filtered = posts.filter((p) => p.post_id != post.post_id);
+      setPosts(filtered);
+    } catch (error) {
+      console.log(error);
     }
   };
 

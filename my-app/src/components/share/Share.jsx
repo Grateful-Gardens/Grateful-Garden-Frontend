@@ -27,7 +27,6 @@ export default function Share(props) {
       body: JSON.stringify(trial),
     });
     const parsed = await result.json();
-    console.log()
     props.setPosts([parsed.data[0], ...props.post])
     setInput("");
   };
