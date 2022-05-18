@@ -2,20 +2,22 @@ import React from "react";
 import { useState } from "react";
 import "./share.css";
 import { PermMedia, Label, Room, EmojiEmotions } from "@mui/icons-material";
+import SendSharpIcon from '@mui/icons-material/SendSharp';
 
 export default function Share() {
   const [input, setInput] = useState("");
   const [hashtag, setHashtag] = useState("");
+  const [user, setUser] = useState(1);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(input);
+    if (input === "") return
 
     const trial = {
       hashtag: hashtag,
       image: "",
       description: input,
-      user_id: 1,
+      user_id: user,
     };
 
     const result = await fetch("http://localhost:9001/posts", {
@@ -37,7 +39,6 @@ export default function Share() {
 
   const handleHashtagClick = (e) => {
     setHashtag(e.target.value);
-    console.log(hashtag);
   };
 
   return (
@@ -96,11 +97,7 @@ export default function Share() {
               <span className="shareOptionText">Feelings</span>
             </div>
           </div>
-          <form onSubmit={handleSubmit}>
-            <button className="shareButton" type="submit">
-              Share
-            </button>
-          </form>
+            <SendSharpIcon className='shareButton' htmlColor="#2e7865" onClick={handleSubmit}/>
         </div>
       </div>
     </div>

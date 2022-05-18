@@ -1,9 +1,10 @@
 .sidebar {
-  flex: 2;
+  flex: 2.3;
   height: calc(100vh - 50px);
   overflow-y: scroll;
   position: sticky;
   top: 50px;
+  margin-left: 20px;
 }
 
 .shareInput {
