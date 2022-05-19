@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect } from "react";
 import "./post.css";
 import { useState } from "react";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
@@ -12,7 +12,15 @@ export default function Post({ post, posts, setPosts }) {
   const [like, setLike] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const [comments, setComments] = useState(1);
+  const [comments, setComments] = useState([]);
+  const [reply, setReply] = useState("");
+
+  const handleComments = async (e) => {
+    e.preventDefault();
+    await fetch(`http://localhost:9001/posts/${post.post_id}/comments`)
+      .then((response) => response.json())
+      .then((data) => console.log(data.data));
+  };
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -23,8 +31,27 @@ export default function Post({ post, posts, setPosts }) {
     !isBookmarked ? setIsBookmarked(true) : setIsBookmarked(false);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      comment_body: reply,
+      user_id: 1,
+      post_id: post.post_id,
+    }
+
+    const result = await fetch(`http://localhost:9001/posts/${post.post_id}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const parsed = await result.json();
+    setReply("");
+  };
+
   const handleDelete = async (e) => {
-    // e.preventDefault();
     try {
       await fetch(`http://localhost:9001/posts/${post.post_id}`, {
         method: "DELETE",
@@ -70,18 +97,6 @@ export default function Post({ post, posts, setPosts }) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            {/* <img
-              className="likeIcon"
-              src="https://media.istockphoto.com/vectors/red-heart-sign-isolated-on-transparent-background-valentines-day-icon-vector-id1182472970?k=20&m=1182472970&s=612x612&w=0&h=EDa61EAq6_7ABD-KWpIbIRQ4kSCcZyoA_3LJzvtVaXQ="
-              onClick={likeHandler}
-              alt=""
-            /> */}
-            {/* <img
-              className="likeIcon"
-              src="assets/heart.png"
-              onClick={likeHandler}
-              alt=""
-            /> */}
             <FavoriteBorderTwoToneIcon
               htmlColor="#2e7865"
               className="likeIcon"
@@ -95,9 +110,15 @@ export default function Post({ post, posts, setPosts }) {
             <span className="postLikeCounter">{like} people like it</span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">{comments} comments</span>
+            <span className="postCommentText" onClick={handleComments}>
+              {comments} comments
+            </span>
           </div>
         </div>
+        <form onSubmit={handleSubmit}>
+          <textarea onChange={(e) => setReply(e.target.value)}></textarea>
+          <button type="submit">Comment</button>
+        </form>
       </div>
     </div>
   );
