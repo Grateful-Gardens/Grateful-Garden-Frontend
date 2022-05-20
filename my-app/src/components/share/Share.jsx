@@ -9,7 +9,6 @@ export default function Share(props) {
   const [hashtag, setHashtag] = useState("");
   const [user, setUser] = useState({id: 1, username: 'jah123'});
 
-
   const createPost = async (e) => {
     if (input === "") return
 
@@ -29,7 +28,6 @@ export default function Share(props) {
       body: JSON.stringify(trial),
     });
     const parsed = await result.json();
-    console.log(parsed.data[0])
     parsed.data[0].username = user.username
     props.setPosts([parsed.data[0], ...props.post])
     setInput("");
