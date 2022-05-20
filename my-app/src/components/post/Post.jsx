@@ -14,8 +14,10 @@ export default function Post({ post, posts, setPosts }) {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [comments, setComments] = useState([]);
   const [reply, setReply] = useState("");
+  const [showComment, setShowComment] = useState(false);
 
   const handleComments = async (e) => {
+    setShowComment(!showComment);
     e.preventDefault();
     await fetch(`http://localhost:9001/posts/${post.post_id}/comments`)
       .then((response) => response.json())
@@ -38,15 +40,18 @@ export default function Post({ post, posts, setPosts }) {
       comment_body: reply,
       user_id: 1,
       post_id: post.post_id,
-    }
+    };
 
-    const result = await fetch(`http://localhost:9001/posts/${post.post_id}/comments`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const result = await fetch(
+      `http://localhost:9001/posts/${post.post_id}/comments`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
     const parsed = await result.json();
     setReply("");
   };
@@ -115,10 +120,17 @@ export default function Post({ post, posts, setPosts }) {
             </span>
           </div>
         </div>
-        <form onSubmit={handleSubmit}>
-          <textarea onChange={(e) => setReply(e.target.value)}></textarea>
-          <button type="submit">Comment</button>
-        </form>
+        {showComment && (
+          <>
+            <form onSubmit={handleSubmit}>
+              <input onChange={(e) => setReply(e.target.value)}></input>
+              {/* <div>
+                Comment
+              </div> */}
+              <button type="submit">Comment</button>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );
