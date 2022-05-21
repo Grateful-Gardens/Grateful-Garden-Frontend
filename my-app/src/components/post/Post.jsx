@@ -1,6 +1,6 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
+import Comments from '../comments/Comments.jsx'
 import "./post.css";
-import { useState } from "react";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
@@ -15,13 +15,16 @@ export default function Post({ post, posts, setPosts }) {
   const [comments, setComments] = useState([]);
   const [reply, setReply] = useState("");
   const [showComment, setShowComment] = useState(false);
+  const [commentsLength, setCommentsLength] = useState(0)
+  const [username, setUsername] = useState({username: 'jah123'})
 
   const handleComments = async (e) => {
     setShowComment(!showComment);
-    e.preventDefault();
     await fetch(`http://localhost:9001/posts/${post.post_id}/comments`)
       .then((response) => response.json())
-      .then((data) => console.log(data.data));
+      .then((data) => {
+        setComments(data.data)
+      });
   };
 
   const likeHandler = () => {
@@ -39,6 +42,7 @@ export default function Post({ post, posts, setPosts }) {
       comment_body: reply,
       user_id: 1,
       post_id: post.post_id,
+      username: username.username
     };
 
     const result = await fetch(
@@ -51,7 +55,8 @@ export default function Post({ post, posts, setPosts }) {
         body: JSON.stringify(data),
       }
     );
-    // const parsed = await result.json();
+    const parsed = await result.json();
+    setComments([...comments, parsed.data[0]])
     setReply("");
   };
 
@@ -115,15 +120,17 @@ export default function Post({ post, posts, setPosts }) {
           </div>
           <div className="postBottomRight">
             <span className="postCommentText" onClick={handleComments}>
-              {comments} comments
+              {commentsLength} comments
             </span>
           </div>
         </div>
         {showComment && (
           <>
             <form onSubmit={handleSubmit}>
-              <div>Comment</div>
-              <input onChange={(e) => setReply(e.target.value)}></input>
+              {comments.map((c) => (
+                <Comments key={c.comment_id} allComments={c}/>
+              ))}
+              <input value={reply} onChange={(e) => setReply(e.target.value)}></input>
               <button type="submit">Comment</button>
             </form>
           </>
