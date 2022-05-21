@@ -35,7 +35,6 @@ export default function Post({ post, posts, setPosts }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const data = {
       comment_body: reply,
       user_id: 1,
@@ -52,7 +51,7 @@ export default function Post({ post, posts, setPosts }) {
         body: JSON.stringify(data),
       }
     );
-    const parsed = await result.json();
+    // const parsed = await result.json();
     setReply("");
   };
 
@@ -97,7 +96,7 @@ export default function Post({ post, posts, setPosts }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post.description}</span>
-          <img className="postImg" src={post.photo} alt="" />
+          <img className="postImg" src={post.image} alt="" />
           {/* <img className="postImg" src="https://www.northernbeachesreview.com.au/images/transform/v1/crop/frm/jess.wallace/8b0a371c-1e18-4bd5-bf78-0a4aed88cc6f.jpg/r0_0_7359_4906_w1200_h678_fmax.jpg" alt="" /> */}
         </div>
         <div className="postBottom">
@@ -123,10 +122,8 @@ export default function Post({ post, posts, setPosts }) {
         {showComment && (
           <>
             <form onSubmit={handleSubmit}>
+              <div>Comment</div>
               <input onChange={(e) => setReply(e.target.value)}></input>
-              {/* <div>
-                Comment
-              </div> */}
               <button type="submit">Comment</button>
             </form>
           </>
