@@ -128,7 +128,7 @@ export default function Post({ post, posts, setPosts }) {
           <>
             <form onSubmit={handleSubmit}>
               {comments.map((c) => (
-                <Comments key={c.comment_id} allComments={c}/>
+                <Comments key={c.comment_id} allComments={c} aComment={comments} setComments={setComments}/>
               ))}
               <input value={reply} onChange={(e) => setReply(e.target.value)}></input>
               <button type="submit">Comment</button>

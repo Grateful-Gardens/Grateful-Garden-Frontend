@@ -5,7 +5,7 @@ export default function Login() {
   const [selectedFile, setSelectedFile] = useState(null)
 
   const fileSelectedHandler = (e) => {
-    console.log(e.target.files[0].name)
+    console.log(e.target.files[0])
   }
 
   const fileUploadHandler = (e) => {
