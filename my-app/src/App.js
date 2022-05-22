@@ -4,6 +4,7 @@ import Login from "./pages/login/Login.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 // import Register from "./pages/register/Register";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Bookmarks from './pages/bookmarks/Bookmarks';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Home />}/>
+          <Route path="/bookmarks" element={<Bookmarks />}/>
           <Route path="/profile" element={<Profile />}/>
           <Route path="/login" element={<Login />}/>
         </Routes>
