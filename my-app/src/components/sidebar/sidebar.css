@@ -37,6 +37,16 @@
   margin-bottom: 20px;
 }
 
+.link {
+  list-style: none;
+  text-decoration: none;
+  color: black
+}
+
+.link:hover {
+  color:#2e7865;
+}
+
 .sidebarIcon {
   margin-right: 15px;
 }
