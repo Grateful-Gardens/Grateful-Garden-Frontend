@@ -7,13 +7,6 @@ import { useEffect } from 'react'
 import './home.css'
 
 export default function Home() {
-
-  useEffect(() => {
-    fetch("http://localhost:9001/posts")
-      .then((response) => response.json())
-      .then((data) => console.log(data.data));
-  }, []);
-
   return (
     <>
       <Topbar />

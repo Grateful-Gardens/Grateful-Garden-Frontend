@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import Comments from '../comments/Comments.jsx'
+import Comments from "../comments/Comments.jsx";
 import "./post.css";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
@@ -15,15 +15,16 @@ export default function Post({ post, posts, setPosts }) {
   const [comments, setComments] = useState([]);
   const [reply, setReply] = useState("");
   const [showComment, setShowComment] = useState(false);
-  const [commentsLength, setCommentsLength] = useState(0)
-  const [username, setUsername] = useState({username: 'jah123'})
+  const [commentsLength, setCommentsLength] = useState(0);
+  const [username, setUsername] = useState({ username: "jah123" });
+  const [user, setUser] = useState(3);
 
   const handleComments = async (e) => {
     setShowComment(!showComment);
     await fetch(`http://localhost:9001/posts/${post.post_id}/comments`)
       .then((response) => response.json())
       .then((data) => {
-        setComments(data.data)
+        setComments(data.data);
       });
   };
 
@@ -32,32 +33,43 @@ export default function Post({ post, posts, setPosts }) {
     setIsLiked(!isLiked);
   };
 
-  const handleBookmark = () => {
+  const handleBookmark = async (e) => {
     !isBookmarked ? setIsBookmarked(true) : setIsBookmarked(false);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = {
-      comment_body: reply,
-      user_id: 1,
-      post_id: post.post_id,
-      username: username.username
-    };
-
-    const result = await fetch(
-      `http://localhost:9001/posts/${post.post_id}/comments`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+    if (!isBookmarked) {
+      try {
+        const data = {
+          user_id: user,
+          post_id: post.post_id,
+        };
+        await fetch(`http://localhost:9001/users/${user}/bookmarks`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        console.log("Added to your bookmarks");
+      } catch (error) {
+        console.log(error);
       }
-    );
-    const parsed = await result.json();
-    setComments([...comments, parsed.data[0]])
-    setReply("");
+    } else {
+      try {
+        const data = {
+          user_id: user,
+          post_id: post.post_id,
+        }
+        await fetch(`http://localhost:9001/users/${user}/bookmarks`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+        console.log('Removed Bookmark')
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   const handleDelete = async (e) => {
@@ -73,6 +85,30 @@ export default function Post({ post, posts, setPosts }) {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      comment_body: reply,
+      user_id: 1,
+      post_id: post.post_id,
+      username: username.username,
+    };
+
+    const result = await fetch(
+      `http://localhost:9001/posts/${post.post_id}/comments`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const parsed = await result.json();
+    setComments([...comments, parsed.data[0]]);
+    setReply("");
   };
 
   return (
@@ -128,9 +164,17 @@ export default function Post({ post, posts, setPosts }) {
           <>
             <form onSubmit={handleSubmit}>
               {comments.map((c) => (
-                <Comments key={c.comment_id} allComments={c} aComment={comments} setComments={setComments}/>
+                <Comments
+                  key={c.comment_id}
+                  allComments={c}
+                  aComment={comments}
+                  setComments={setComments}
+                />
               ))}
-              <input value={reply} onChange={(e) => setReply(e.target.value)}></input>
+              <input
+                value={reply}
+                onChange={(e) => setReply(e.target.value)}
+              ></input>
               <button type="submit">Comment</button>
             </form>
           </>
