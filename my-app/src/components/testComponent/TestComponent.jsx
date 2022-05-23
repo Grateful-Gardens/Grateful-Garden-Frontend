@@ -4,14 +4,14 @@ import Bookmark from "../bookmark/Bookmark.jsx"
 
 export default function TestComponent() {
     const [bookmarks, setBookmarks] = useState([]);
-    const [user, setUser] = useState(3)
+    const [user, setUser] = useState(4)
 
     useEffect(() => {
         fetch(`http://localhost:9001/users/${user}/bookmarks`)
           .then((response) => response.json())
           .then((data) => setBookmarks(data.data));
       }, []);
-      
+      console.log(bookmarks)
   return (
     <div className="feed">
     <div className="feedWrapper">

@@ -9,7 +9,7 @@ import Comments from "../comments/Comments.jsx";
 
 
 export default function Bookmark({ bookmark, bookmarks, setBookmarks }) {
-  // console.log(bookmark)
+  
   return (
     <div>Bookmarked post</div>
   )

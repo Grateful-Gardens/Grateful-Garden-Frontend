@@ -12,7 +12,7 @@ export default function Share(props) {
   const createPost = async (e) => {
     if (input === "") return
 
-    const trial = {
+    const postInfo = {
       hashtag: hashtag,
       image: "",
       description: input,
@@ -25,7 +25,7 @@ export default function Share(props) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(trial),
+      body: JSON.stringify(postInfo),
     });
     const parsed = await result.json();
     parsed.data[0].username = user.username

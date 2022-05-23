@@ -81,3 +81,13 @@
   object-fit: cover;
   border-radius: 5px;
 }
+
+.edit {
+  float: right;
+  cursor: pointer;
+}
+
+.form-control {
+  display: flex;
+  justify-content: center;
+}

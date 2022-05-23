@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const [friends, setFriends] = useState([]);
-  const [user, setUser] = useState(4)
+  const [user, setUser] = useState(1)
 
   useEffect(() => {
     fetch(`http://localhost:9001/users/${user}/friends`)
