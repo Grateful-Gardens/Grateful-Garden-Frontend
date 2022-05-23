@@ -3,11 +3,12 @@ import "./profile.css";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
+import MyFeed from "../../components/myFeed/MyFeed.jsx";
 import Rightbar from "../../components/rightbar/Rightbar";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState([]);
-  const [user, setUser] = useState(4)
+  const [user, setUser] = useState(1)
 
   useEffect(() => {
     fetch(`http://localhost:9001/users/${user}`)
@@ -40,8 +41,8 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed />
-            <Rightbar profile/>
+            <MyFeed />
+            <Rightbar profile key={userInfo.user_id} userInfo={userInfo} setUserInfo={setUserInfo}/>
           </div>
         </div>
       </div>

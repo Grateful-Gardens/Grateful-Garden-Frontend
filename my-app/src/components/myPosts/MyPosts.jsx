@@ -1,14 +1,14 @@
 import { React, useEffect, useState } from "react";
-import Comments from "../comments/Comments.jsx";
-import "./post.css";
+import "./myPosts.css"
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import { DateTime } from "luxon";
 import DeleteIcon from "@mui/icons-material/Delete";
-// import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
+import Comments from "../comments/Comments.jsx";
 
-export default function Post({ post, posts, setPosts }) {
+
+export default function MyPosts({ post, posts, setPosts }) {
   const [like, setLike] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -17,7 +17,9 @@ export default function Post({ post, posts, setPosts }) {
   const [showComment, setShowComment] = useState(false);
   const [commentsLength, setCommentsLength] = useState(0);
   const [username, setUsername] = useState({ username: "jah123" });
-  const [user, setUser] = useState(4);
+  const [user, setUser] = useState(1);
+
+  console.log(post)
 
   const handleComments = async (e) => {
     setShowComment(!showComment);
@@ -181,5 +183,5 @@ export default function Post({ post, posts, setPosts }) {
         )}
       </div>
     </div>
-  );
+  )
 }
