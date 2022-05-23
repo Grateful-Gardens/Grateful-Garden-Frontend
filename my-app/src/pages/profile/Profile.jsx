@@ -1,12 +1,20 @@
-import React from 'react'
-import './profile.css'
-
+import { React, useState, useEffect } from "react";
+import "./profile.css";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 
 export default function Profile() {
+  const [userInfo, setUserInfo] = useState([]);
+  const [user, setUser] = useState(4)
+
+  useEffect(() => {
+    fetch(`http://localhost:9001/users/${user}`)
+      .then((response) => response.json())
+      .then((data) => setUserInfo(data.data));
+  }, []);
+
   return (
     <>
       <Topbar />
@@ -17,18 +25,18 @@ export default function Profile() {
             <div className="profileCover">
               <img
                 className="profileCoverImg"
-                src="https://www.teahub.io/photos/full/194-1942059_hd-wallpapers-4k-resolution-cool-4k-nature-backgrounds.jpg"
+                src={userInfo.cover_pic}
                 alt=""
               />
               <img
                 className="profileUserImg"
-                src="https://shotkit.com/wp-content/uploads/2021/06/cool-profile-pic-matheus-ferrero.jpeg"
+                src={userInfo.profile_pic}
                 alt=""
               />
             </div>
             <div className="profileInfo">
-                <h4 className="profileInfoName">Jane Doe</h4>
-                <span className="profileInfoDesc">Hello gardeners!</span>
+              <h4 className="profileInfoName">{userInfo.username}</h4>
+              <span className="profileInfoDesc">{userInfo.bio}</span>
             </div>
           </div>
           <div className="profileRightBottom">

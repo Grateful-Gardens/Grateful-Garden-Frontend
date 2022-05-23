@@ -1,10 +1,19 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import "./rightbar.css";
 import Online from "../online/Online";
 import { Users } from "../../dummyData";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 
 export default function Rightbar({ profile }) {
+  const [friends, setFriends] = useState([]);
+  const [user, setUser] = useState(4)
+
+  useEffect(() => {
+    fetch(`http://localhost:9001/users/${user}/friends`)
+      .then((response) => response.json())
+      .then((data) => setFriends(data));
+  }, []);
+
   const HomeRightbar = () => {
     return (
       <>
@@ -22,8 +31,8 @@ export default function Rightbar({ profile }) {
         />
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
-          {Users.map((u) => (
-            <Online key={u.id} user={u} />
+          {friends.map((u) => (
+            <Online key={u.user_id} user={u} />
           ))}
         </ul>
       </>
@@ -31,6 +40,7 @@ export default function Rightbar({ profile }) {
   };
 
   const ProfileRightbar = () => {
+    // console.log(userInfo)
     return (
       <>
         <h4 className="rightbarTitle">User information</h4>
@@ -56,22 +66,6 @@ export default function Rightbar({ profile }) {
         </div>
         <h4 className="rightbarTitle">Garden Owners You Follow</h4>
         <div className="rightbarFollowings">
-          <div className="rightbarFollowing">
-            <img
-              src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">John Carter</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">John Carter</span>
-          </div>
           <div className="rightbarFollowing">
             <img
               src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
