@@ -1,11 +1,20 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import "./sidebar.css";
 import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
-import { RssFeed, Bookmark, HelpOutline, Event } from "@mui/icons-material";
+import { RssFeed, Bookmark, HelpOutline, Event, FunctionsRounded } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
+  const [friends, setFriends] = useState([]);
+  const [user, setUser] = useState(4)
+
+  useEffect(() => {
+    fetch(`http://localhost:9001/users/${user}/friends`)
+      .then((response) => response.json())
+      .then((data) => setFriends(data));
+  }, []);
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -34,8 +43,8 @@ export default function Sidebar() {
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-          {Users.map((u) => (
-            <CloseFriend key={u.id} user={u} />
+          {friends.map((f) => (
+            <CloseFriend key={f.user_id} friend={f} />
           ))}
         </ul>
       </div>
