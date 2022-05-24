@@ -3,7 +3,7 @@ import Share from "../share/Share";
 import MyPosts from "../myPosts/MyPosts.jsx"
 import "./myFeed.css";
 
-export default function MyFeed() {
+export default function MyFeed({ userInfo }) {
   const [allMyPosts, setAllMyPosts] = useState([]);
   const [user, setUser] = useState(1);
   const [posts, setPosts] = useState([]);
@@ -24,7 +24,7 @@ export default function MyFeed() {
     <div className="feed">
       <div className="feedWrapper">
         {allMyPosts.map((mP) => (
-          <MyPosts key={mP.post_id} post={mP} posts={posts} setPosts={setPosts} setAllMyPosts={setAllMyPosts}/>
+          <MyPosts key={mP.post_id} post={mP} posts={posts} setPosts={setPosts} setAllMyPosts={setAllMyPosts} userInfo={userInfo} allMyPosts={allMyPosts}/>
         ))}
       </div>
     </div>

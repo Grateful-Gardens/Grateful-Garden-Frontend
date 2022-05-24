@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 
 
-export default function MyPosts({ post, posts, setPosts, setAllMyPosts }) {
+export default function MyPosts({ post, posts, setPosts, setAllMyPosts, userInfo, allMyPosts}) {
   const [like, setLike] = useState(post.like_count);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -43,7 +43,7 @@ export default function MyPosts({ post, posts, setPosts, setAllMyPosts }) {
       });
       const filtered = posts.filter((p) => p.post_id != post.post_id);
       setPosts(filtered);
-      setAllMyPosts(filtered);
+      setAllMyPosts(allMyPosts.filter((p) => p.post_id != post.post_id))
     } catch (error) {
       console.log(error);
     }
@@ -69,6 +69,8 @@ export default function MyPosts({ post, posts, setPosts, setAllMyPosts }) {
       }
     );
     const parsed = await result.json();
+    parsed.data[0].username = userInfo.username;
+    parsed.data[0].profile_pic = userInfo.profile_pic;
     setComments([...comments, parsed.data[0]]);
     setReply("");
   };

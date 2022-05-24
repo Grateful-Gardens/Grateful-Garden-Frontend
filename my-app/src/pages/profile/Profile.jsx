@@ -41,7 +41,7 @@ export default function Profile() {
             </div>
           </div>
           <div className="profileRightBottom">
-            <MyFeed />
+            <MyFeed userInfo={userInfo}/>
             <Rightbar profile key={userInfo.user_id} userInfo={userInfo} setUserInfo={setUserInfo}/>
           </div>
         </div>
