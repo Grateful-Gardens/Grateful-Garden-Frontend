@@ -19,7 +19,6 @@ export default function Post({ post, posts, setPosts, userInfo }) {
   const [comments, setComments] = useState([]);
   const [reply, setReply] = useState("");
   const [showComment, setShowComment] = useState(false);
-  const [commentsLength, setCommentsLength] = useState(0);
   const [username, setUsername] = useState({ username: "jah123" });
   const [user, setUser] = useState(1);
 

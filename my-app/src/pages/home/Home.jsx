@@ -5,7 +5,7 @@ import Feed from '../../components/feed/Feed.jsx'
 import Rightbar from '../../components/rightbar/Rightbar.jsx'
 import './home.css'
 
-export default function Home() {
+export default function Home({setAuth}) {
   const [userInfo, setUserInfo] = useState([]);
   const [user, setUser] = useState(1)
 
@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <>
-      <Topbar key={userInfo.user_id} userInfo={userInfo}/>
+      <Topbar key={userInfo.user_id} userInfo={userInfo} setAuth={setAuth}/>
       <div className="homeContainer">
         <Sidebar />
         <Feed key={userInfo.user_id} userInfo={userInfo}/>
