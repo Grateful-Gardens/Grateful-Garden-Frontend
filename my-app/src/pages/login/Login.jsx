@@ -1,30 +1,90 @@
-import {React, useState} from 'react'
+import { React, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./login.css"
 
+export default function Login({ setAuth }) {
+  const navigate = useNavigate();
+  const [loginForm, setLoginForm] = useState({
+    email: "",
+    password: "",
+  });
 
-export default function Login() {
-  const [selectedFile, setSelectedFile] = useState(null)
-
-  const fileSelectedHandler = (e) => {
-    console.log(e.target.files[0])
-  }
-
-  const fileUploadHandler = (e) => {
-      // const result = await fetch("http://localhost:9001/", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(trial),
-      // });
-      // const parsed = await result.json();
-      // setSelectedFile(null);
-  }
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    // const res = await fetch(`http://localhost:9001/login`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(loginForm),
+    // });
+    // const data = await res.json();
+    // if (data.token) {
+    //   window.localStorage.setItem("token", data.token);
+    //   setAuth(true);
+    // } else {
+    //   setAuth(false);
+    // }
+    // navigate("/", { replace: true });
+    
+  };
+  console.log(loginForm.email, loginForm.password)
 
   return (
-    <>
-    <input type="file" onChange={fileSelectedHandler}></input>
-    <button onClick={fileUploadHandler}>Upload</button>
-    </>
-  )
-}
+    <div>
+      <section className="h-100 h-custom entire-section">
+        <div className="container pt-4 h-100">
+          <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="col-lg-8 col-xl-6">
+              <div className="card rounded-3">
+                <img
+                  src="https://arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/GUE6GE2XMFGE3GVQWE7QAISGVA.jpg"
+                  className=" background-image"
+                  alt="Sample photo"
+                />
+                <div className="card-body p-4 p-md-5">
+                  <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 d-flex flex-column justify-content-center align-items-center login-text">
+                    Log In
+                  </h3>
 
+                  <form className="px-md-2 d-flex flex-column justify-content-center align-items-center">
+                    <div className="row mb-4 pb-2 pb-md-0 mb-md-5 d-flex flex-column justify-content-center align-items-center">
+                      <div className="col-md-6">
+                        <div className="form-outline">
+                          <input
+                            type="email"
+                            id="form3Example1w"
+                            className="form-control"
+                            onChange={(e) => setLoginForm({ email: e.target.value })}
+                          />
+                          <label className="form-label mb-3" htmlFor="form3Example1w ">
+                            Email
+                          </label>
+                        </div>
+                        <div className="form-outline">
+                          <input
+                            type="password"
+                            id="form3Example1w"
+                            className="form-control"
+                            onChange={(e) => setLoginForm({ password: e.target.value })}
+                          />
+                          <label className="form-label" htmlFor="form3Example1w">
+                            Password 
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button type="submit" className="btn btn-success btn-lg mb-1" onClick={handleLogin}>
+                      Submit
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

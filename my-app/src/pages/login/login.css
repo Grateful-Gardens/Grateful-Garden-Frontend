@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  
+}
+
+.entire-section {
+    /* background-color: #8fc4b7 !important; */
+}
+
+.login-text {
+    margin-bottom: 15px !important;
+}
+
+.form-label {
+    display: flex;
+    justify-content: center;
+}
+
+.background-image {
+    border-top-left-radius: .3rem;
+    border-top-right-radius: .3rem;
+}
+
+
+@media (min-width: 1025px) {
+  .h-custom {
+    height: 100vh !important;
+  }
+}
