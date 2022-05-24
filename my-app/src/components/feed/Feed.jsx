@@ -3,7 +3,7 @@ import "./feed.css";
 import Share from "../share/Share.jsx";
 import Post from "../post/Post.jsx";
 
-export default function Feed() {
+export default function Feed({ userInfo }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function Feed() {
   return (
     <div className="feed">
       <div className="feedWrapper">
-        <Share post={posts} setPosts={setPosts} />
+        <Share post={posts} setPosts={setPosts} userInfo={userInfo}/>
         {posts.map((p) => (
           <Post key={p.post_id} post={p} posts={posts} setPosts={setPosts} />
         ))}

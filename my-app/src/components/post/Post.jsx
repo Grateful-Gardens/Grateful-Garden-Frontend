@@ -9,7 +9,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 // import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 
 export default function Post({ post, posts, setPosts }) {
-  const [like, setLike] = useState(0);
+  const [like, setLike] = useState(post.like_count);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [comments, setComments] = useState([]);
@@ -17,7 +17,7 @@ export default function Post({ post, posts, setPosts }) {
   const [showComment, setShowComment] = useState(false);
   const [commentsLength, setCommentsLength] = useState(0);
   const [username, setUsername] = useState({ username: "jah123" });
-  const [user, setUser] = useState(4);
+  const [user, setUser] = useState(1);
 
   const handleComments = async (e) => {
     setShowComment(!showComment);
@@ -28,8 +28,24 @@ export default function Post({ post, posts, setPosts }) {
       });
   };
 
-  const likeHandler = () => {
-    setLike(isLiked ? like - 1 : like + 1);
+  const addLike = async (e) => {
+    const likeInfo = {
+      
+    }
+
+    await fetch(`http://localhost:9001/posts/${post.post_id}/likes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(),
+    })
+  }
+
+  const likeHandler = async () => {
+    setLike(isLiked 
+      ? like - 1
+      : like + 1);
     setIsLiked(!isLiked);
   };
 
@@ -119,7 +135,7 @@ export default function Post({ post, posts, setPosts }) {
             <img
               className="postProfileImg"
               //   src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
-              src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
+              src={post.profile_pic}
               alt=""
             />
             <span className="postUsername">{post.username}</span>
@@ -156,7 +172,7 @@ export default function Post({ post, posts, setPosts }) {
           </div>
           <div className="postBottomRight">
             <span className="postCommentText" onClick={handleComments}>
-              {commentsLength} comments
+              {post.comment_count} comments
             </span>
           </div>
         </div>

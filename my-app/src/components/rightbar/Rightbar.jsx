@@ -41,7 +41,7 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
   };
 
   const ProfileRightbar = () => {
-    const [user, setUser] = useState(4);
+    const [user, setUser] = useState(1);
     const [bio, setBio] = useState("");
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
@@ -64,8 +64,7 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
       if (newUserInfo.bio === "") newUserInfo.bio = userInfo.bio;
       if (newUserInfo.city === "") newUserInfo.city = userInfo.city;
       if (newUserInfo.country === "") newUserInfo.country = userInfo.country;
-      if (newUserInfo.longer_bio === "")
-        newUserInfo.longer_bio = userInfo.longer_bio;
+      if (newUserInfo.longer_bio === "") newUserInfo.longer_bio = userInfo.longer_bio;
 
       await fetch(`http://localhost:9001/profile/${user}`, {
         method: "PUT",

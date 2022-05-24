@@ -7,8 +7,7 @@ import { DateTime } from "luxon";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Comments from "../comments/Comments.jsx";
 
-
-export default function MyPosts({ post, posts, setPosts }) {
+export default function MyPosts({ post, posts, setPosts, setAllMyPosts }) {
   const [like, setLike] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -18,8 +17,6 @@ export default function MyPosts({ post, posts, setPosts }) {
   const [commentsLength, setCommentsLength] = useState(0);
   const [username, setUsername] = useState({ username: "jah123" });
   const [user, setUser] = useState(1);
-
-  console.log(post)
 
   const handleComments = async (e) => {
     setShowComment(!showComment);
@@ -84,6 +81,7 @@ export default function MyPosts({ post, posts, setPosts }) {
       });
       const filtered = posts.filter((p) => p.post_id != post.post_id);
       setPosts(filtered);
+      setAllMyPosts(filtered)
     } catch (error) {
       console.log(error);
     }
@@ -121,7 +119,7 @@ export default function MyPosts({ post, posts, setPosts }) {
             <img
               className="postProfileImg"
               //   src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
-              src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
+              src={post.profile_pic}
               alt=""
             />
             <span className="postUsername">{post.username}</span>
@@ -154,11 +152,11 @@ export default function MyPosts({ post, posts, setPosts }) {
               className="likeIcon"
               onClick={likeHandler}
             />
-            <span className="postLikeCounter">{like} people like it</span>
+            <span className="postLikeCounter">{post.like_count} people like it</span>
           </div>
           <div className="postBottomRight">
             <span className="postCommentText" onClick={handleComments}>
-              {commentsLength} comments
+              {post.comment_count} comments
             </span>
           </div>
         </div>

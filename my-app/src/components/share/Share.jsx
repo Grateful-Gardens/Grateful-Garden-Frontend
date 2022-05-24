@@ -8,6 +8,7 @@ export default function Share(props) {
   const [input, setInput] = useState("");
   const [hashtag, setHashtag] = useState("");
   const [user, setUser] = useState({id: 1, username: 'jah123'});
+  const [profile_pic, setProfile_pic] = useState(props.userInfo.profile_pic)
 
   const createPost = async (e) => {
     if (input === "") return
@@ -29,6 +30,7 @@ export default function Share(props) {
     });
     const parsed = await result.json();
     parsed.data[0].username = user.username
+    parsed.data[0].profile_pic = props.userInfo.profile_pic
     props.setPosts([parsed.data[0], ...props.post])
     setInput("");
   };
@@ -47,8 +49,8 @@ export default function Share(props) {
         <div className="shareTop">
           <img
             className="shareProfileImg"
-            src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
-            alt=""
+            src={props.userInfo.profile_pic}
+            alt="Profile Pic"
           />
           <input
             value={input}

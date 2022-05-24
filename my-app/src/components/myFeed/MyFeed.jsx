@@ -5,7 +5,7 @@ import "./myFeed.css";
 
 export default function MyFeed() {
   const [allMyPosts, setAllMyPosts] = useState([]);
-  const [user, setUser] = useState(4);
+  const [user, setUser] = useState(1);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function MyFeed() {
     <div className="feed">
       <div className="feedWrapper">
         {allMyPosts.map((mP) => (
-          <MyPosts key={mP.post_id} post={mP} posts={posts} setPosts={setPosts}/>
+          <MyPosts key={mP.post_id} post={mP} posts={posts} setPosts={setPosts} setAllMyPosts={setAllMyPosts}/>
         ))}
       </div>
     </div>
