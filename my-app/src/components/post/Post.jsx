@@ -200,7 +200,8 @@ export default function Post({ post, posts, setPosts, userInfo }) {
                 <Button
                   className="send"
                   type="submit"
-                  variant="outlined"
+                  variant="contained"
+                  color="info"
                   size="small"
                 >
                   Comment
