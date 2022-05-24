@@ -18,7 +18,7 @@ export default function Profile() {
 
   return (
     <>
-      <Topbar />
+      <Topbar key={userInfo.user_id} userInfo={userInfo}/>
       <div className="profile">
         <Sidebar />
         <div className="profileRight">
