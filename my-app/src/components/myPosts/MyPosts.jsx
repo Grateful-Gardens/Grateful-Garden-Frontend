@@ -141,6 +141,7 @@ export default function MyPosts({ post, posts, setPosts, setAllMyPosts }) {
                   className="send"
                   type="submit"
                   variant="outlined"
+                  color="info"
                   size="small"
                 >
                   Comment
