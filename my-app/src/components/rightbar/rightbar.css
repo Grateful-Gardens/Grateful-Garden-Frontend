@@ -87,7 +87,20 @@
   cursor: pointer;
 }
 
-.form-control {
+.modal-header,
+.modal-body {
+  /* padding-left: 50px; */
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
+
+.form-control {
+  float: right !important;
+}
+
+
+
+
+

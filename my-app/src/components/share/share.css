@@ -76,7 +76,7 @@
 } */
 
 .shareButton {
-  margin-right: 20px;
+  /* margin-right: 20px; */
   cursor: pointer;
 }
 
@@ -121,6 +121,11 @@
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
 }
+
+.addPost {
+  margin-right: 10px;
+}
+
 
 @media only screen and (max-width: 425px) {
   .shareWrapper {

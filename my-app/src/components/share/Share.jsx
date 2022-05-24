@@ -2,16 +2,19 @@ import React from "react";
 import { useState } from "react";
 import "./share.css";
 import { PermMedia, Label, Room, EmojiEmotions } from "@mui/icons-material";
-import SendSharpIcon from '@mui/icons-material/SendSharp';
+import SendSharpIcon from "@mui/icons-material/SendSharp";
+import TagIcon from "@mui/icons-material/Tag";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import IconButton from "@mui/material/IconButton";
 
 export default function Share(props) {
   const [input, setInput] = useState("");
   const [hashtag, setHashtag] = useState("");
-  const [user, setUser] = useState({id: 1, username: 'jah123'});
-  const [profile_pic, setProfile_pic] = useState(props.userInfo.profile_pic)
+  const [user, setUser] = useState({ id: 1, username: "jah123" });
+  const [profile_pic, setProfile_pic] = useState(props.userInfo.profile_pic);
 
   const createPost = async (e) => {
-    if (input === "") return
+    if (input === "") return;
 
     const postInfo = {
       hashtag: hashtag,
@@ -29,9 +32,9 @@ export default function Share(props) {
       body: JSON.stringify(postInfo),
     });
     const parsed = await result.json();
-    parsed.data[0].username = user.username
-    parsed.data[0].profile_pic = props.userInfo.profile_pic
-    props.setPosts([parsed.data[0], ...props.post])
+    parsed.data[0].username = user.username;
+    parsed.data[0].profile_pic = props.userInfo.profile_pic;
+    props.setPosts([parsed.data[0], ...props.post]);
     setInput("");
   };
 
@@ -63,13 +66,18 @@ export default function Share(props) {
         <div className="shareBottom">
           <div className="shareOptions">
             <div className="shareOption">
-              <PermMedia htmlColor="tomato" className="shareIcon" />
+              {/* <PermMedia htmlColor="tomato" className="shareIcon" /> */}
+              <IconButton aria-label="delete">
+                <PhotoCameraIcon htmlColor="#2e7865" className="shareIcon" />
+              </IconButton>
               {/* <input type="file"/> */}
               <span className="shareOptionText">Photo</span>
             </div>
             <div className="shareOption">
               <div className="dropdown">
-                <Label htmlColor="blue" className="shareIcon" />
+                <IconButton aria-label="delete">
+                  <TagIcon htmlColor="#2e7865" className="shareIcon" />
+                </IconButton>
                 <span className="shareOptionText">Tag</span>
                 <div className="dropdown-content">
                   <option value="Green" onClick={handleHashtagClick}>
@@ -90,16 +98,22 @@ export default function Share(props) {
                 </div>
               </div>
             </div>
-            <div className="shareOption">
+            {/* <div className="shareOption">
               <Room htmlColor="green" className="shareIcon" />
               <span className="shareOptionText">Location</span>
             </div>
             <div className="shareOption">
               <EmojiEmotions htmlColor="goldenrod" className="shareIcon" />
               <span className="shareOptionText">Feelings</span>
-            </div>
+            </div> */}
           </div>
-            <SendSharpIcon className='shareButton' htmlColor="#2e7865" onClick={createPost}/>
+          <IconButton aria-label="delete" className="addPost">
+            <SendSharpIcon
+              className="shareButton"
+              htmlColor="#2e7865"
+              onClick={createPost}
+            />
+          </IconButton>
         </div>
       </div>
     </div>
