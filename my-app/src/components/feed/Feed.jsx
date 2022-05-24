@@ -17,7 +17,7 @@ export default function Feed({ userInfo }) {
       <div className="feedWrapper">
         <Share post={posts} setPosts={setPosts} userInfo={userInfo}/>
         {posts.map((p) => (
-          <Post key={p.post_id} post={p} posts={posts} setPosts={setPosts} />
+          <Post key={p.post_id} post={p} posts={posts} setPosts={setPosts} userInfo={userInfo} />
         ))}
       </div>
     </div>

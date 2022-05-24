@@ -8,7 +8,7 @@ import Rightbar from "../../components/rightbar/Rightbar";
 
 export default function Profile() {
   const [userInfo, setUserInfo] = useState([]);
-  const [user, setUser] = useState(1)
+  const [user, setUser] = useState(1 )
 
   useEffect(() => {
     fetch(`http://localhost:9001/users/${user}`)

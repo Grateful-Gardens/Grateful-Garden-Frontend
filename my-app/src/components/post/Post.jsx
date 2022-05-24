@@ -6,9 +6,13 @@ import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import { DateTime } from "luxon";
 import DeleteIcon from "@mui/icons-material/Delete";
+import SendIcon from "@mui/icons-material/Send";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+
 // import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 
-export default function Post({ post, posts, setPosts }) {
+export default function Post({ post, posts, setPosts, userInfo }) {
   const [like, setLike] = useState(post.like_count);
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -29,9 +33,7 @@ export default function Post({ post, posts, setPosts }) {
   };
 
   const addLike = async (e) => {
-    const likeInfo = {
-      
-    }
+    const likeInfo = {};
 
     await fetch(`http://localhost:9001/posts/${post.post_id}/likes`, {
       method: "POST",
@@ -39,54 +41,52 @@ export default function Post({ post, posts, setPosts }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(),
-    })
-  }
+    });
+  };
 
-  const likeHandler = async () => {
-    setLike(isLiked 
-      ? like - 1
-      : like + 1);
+  const likeHandler = () => {
+    setLike(isLiked ? Number(like) - 1 : Number(like) + 1);
     setIsLiked(!isLiked);
   };
 
-  const handleBookmark = async (e) => {
-    !isBookmarked ? setIsBookmarked(true) : setIsBookmarked(false);
-    if (!isBookmarked) {
-      try {
-        const data = {
-          user_id: user,
-          post_id: post.post_id,
-        };
-        await fetch(`http://localhost:9001/users/${user}/bookmarks`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-        console.log("Added to your bookmarks");
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        const data = {
-          user_id: user,
-          post_id: post.post_id,
-        }
-        await fetch(`http://localhost:9001/users/${user}/bookmarks`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-        console.log('Removed Bookmark')
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
+  // const handleBookmark = async (e) => {
+  //   !isBookmarked ? setIsBookmarked(true) : setIsBookmarked(false);
+  //   if (!isBookmarked) {
+  //     try {
+  //       const data = {
+  //         user_id: user,
+  //         post_id: post.post_id,
+  //       };
+  //       await fetch(`http://localhost:9001/users/${user}/bookmarks`, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(data),
+  //       });
+  //       console.log("Added to your bookmarks");
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   } else {
+  //     try {
+  //       const data = {
+  //         user_id: user,
+  //         post_id: post.post_id,
+  //       };
+  //       await fetch(`http://localhost:9001/users/${user}/bookmarks`, {
+  //         method: "DELETE",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(data),
+  //       });
+  //       console.log("Removed Bookmark");
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  // };
 
   const handleDelete = async (e) => {
     try {
@@ -107,9 +107,8 @@ export default function Post({ post, posts, setPosts }) {
     e.preventDefault();
     const data = {
       comment_body: reply,
-      user_id: 1,
+      user_id: user,
       post_id: post.post_id,
-      username: username.username,
     };
 
     const result = await fetch(
@@ -123,6 +122,8 @@ export default function Post({ post, posts, setPosts }) {
       }
     );
     const parsed = await result.json();
+    parsed.data[0].username = userInfo.username;
+    parsed.data[0].profile_pic = userInfo.profile_pic;
     setComments([...comments, parsed.data[0]]);
     setReply("");
   };
@@ -144,8 +145,14 @@ export default function Post({ post, posts, setPosts }) {
             </span>
           </div>
           <div className="postTopRight">
-            <DeleteIcon type="submit" onClick={handleDelete} />
-            <BookmarkAddOutlinedIcon onClick={handleBookmark} />
+            {post.user_id === user && (
+              <IconButton aria-label="delete">
+              <DeleteIcon type="submit" onClick={handleDelete} />
+            </IconButton>
+            )}
+            {/* <IconButton aria-label="delete">
+              <BookmarkAddOutlinedIcon onClick={handleBookmark} />
+            </IconButton> */}
           </div>
           {/* <div className="postTopRight">
             <BookmarkAddedIcon onClick={handleBookmark} />
@@ -158,17 +165,14 @@ export default function Post({ post, posts, setPosts }) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <FavoriteBorderTwoToneIcon
+          <IconButton aria-label="delete">
+          <FavoriteBorderTwoToneIcon
               htmlColor="#2e7865"
               className="likeIcon"
               onClick={likeHandler}
             />
-            <ThumbUpAltIcon
-              htmlColor="#2e7865"
-              className="likeIcon"
-              onClick={likeHandler}
-            />
-            <span className="postLikeCounter">{like} people like it</span>
+            </IconButton>
+            <span className="postLikeCounter">{like} likes</span>
           </div>
           <div className="postBottomRight">
             <span className="postCommentText" onClick={handleComments}>
@@ -187,11 +191,21 @@ export default function Post({ post, posts, setPosts }) {
                   setComments={setComments}
                 />
               ))}
-              <input
-                value={reply}
-                onChange={(e) => setReply(e.target.value)}
-              ></input>
-              <button type="submit">Comment</button>
+              <div className="commenting">
+                <input
+                  className="comment-on-post"
+                  value={reply}
+                  onChange={(e) => setReply(e.target.value)}
+                ></input>
+                <Button
+                  className="send"
+                  type="submit"
+                  variant="outlined"
+                  size="small"
+                >
+                  Comment
+                </Button>
+              </div>
             </form>
           </>
         )}

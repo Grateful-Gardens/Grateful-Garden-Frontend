@@ -20,7 +20,7 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
     return (
       <>
         <div className="birthdayContainer">
-          <LocalFloristIcon htmlColor="green" className="birthdayImg" />
+          <LocalFloristIcon htmlColor="#2e7865" className="birthdayImg" />
           <span className="birthdayText">
             <b>New Garden</b> just <b>dropped</b> come check it out!
           </span>
@@ -104,15 +104,9 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
                   <h5 className="modal-title" id="exampleModalLabel">
                     Edit Info
                   </h5>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
                 </div>
                 <div className="modal-body">
-                  <div className="row g-3 align-items-center">
+                  <div className="row g-3 align-items-center mt-3">
                     <div className="col-auto">
                       <label
                         htmlFor="inputPassword6"
@@ -131,7 +125,7 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
                       />
                     </div>
                   </div>
-                  <div className="row g-3 align-items-center">
+                  <div className="row g-3 align-items-center mt-3">
                     <div className="col-auto">
                       <label
                         htmlFor="inputPassword6"
@@ -150,7 +144,7 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
                       />
                     </div>
                   </div>
-                  <div className="row g-3 align-items-center">
+                  <div className="row g-3 align-items-center mt-3">
                     <div className="col-auto">
                       <label
                         htmlFor="inputPassword6"
@@ -169,7 +163,7 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
                       />
                     </div>
                   </div>
-                  <div className="row g-3 align-items-center">
+                  <div className="row g-3 align-items-center mt-3 mb-3">
                     <div className="col-auto">
                       <label
                         htmlFor="inputPassword6"
