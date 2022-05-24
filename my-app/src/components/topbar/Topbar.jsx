@@ -3,9 +3,10 @@ import "./topbar.css";
 import Search from "@mui/icons-material/Search";
 import Person from "@mui/icons-material/Person";
 import Notifications from "@mui/icons-material/Notifications";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Topbar({ userInfo }) {
+export default function Topbar({ userInfo, setAuth }) {
+  const navigate = useNavigate()
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -25,9 +26,14 @@ export default function Topbar({ userInfo }) {
           <Link to="/">
             <span className="topbarLink">Homepage</span>
           </Link>
-          <Link to="/login">
-            <span className="topbarLink">Sign Out</span>
-          </Link>
+          {/* <Link to="/login"> */}
+            <span className="topbarLink" onClick={(e) => {
+              e.preventDefault()
+              setAuth(false)
+              window.localStorage.setItem("token", "")
+              navigate("/login")
+            }}>Sign Out</span>
+          {/* </Link> */}
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
