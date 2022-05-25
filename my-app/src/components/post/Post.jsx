@@ -9,7 +9,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-
+import { Link } from "react-router-dom";
 // import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 
 export default function Post({ post, posts, setPosts, userInfo }) {
@@ -127,18 +127,25 @@ export default function Post({ post, posts, setPosts, userInfo }) {
     setReply("");
   };
 
+  const handleClick = (e) => {
+    console.log(post.user_id)
+  }
+
   return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
+            <Link to="/profile">
             <img
               className="postProfileImg"
               //   src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
               src={post.profile_pic}
               alt=""
+              onClick={handleClick}
             />
-            <span className="postUsername">{post.username}</span>
+            </Link >
+            <span className="postUsername" onClick={handleClick}>{post.username}</span>
             <span className="postDate">
               {DateTime.fromISO(post.time_posted).toRelative()}
             </span>

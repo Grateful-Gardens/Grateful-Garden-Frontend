@@ -40,19 +40,29 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home setAuth={setAuth}/>} />
-        {/* <Route
+        {/* <Route path="/" element={<Home setAuth={setAuth}/>} /> */}
+        <Route
           path="/"
           element={
             !isAuthenticated ? (
-              <Login setAuth={setAuth} />
+              <Navigate replace to="/login" />
             ) : (
-              <Navigate replace to="/" />
+              <Home setAuth={setAuth}/>
             )
           }
-        /> */}
+        />
         <Route path="/bookmarks" element={<Bookmarks />} />
-        <Route path="/profile" element={<Profile setAuth={setAuth}/>} />
+        <Route
+          path="/profile"
+          element={
+            !isAuthenticated ? (
+              <Navigate replace to="/login" />
+            ) : (
+              <Profile setAuth={setAuth}/>
+            )
+          }
+        />
+        {/* <Route path="/profile" element={<Profile setAuth={setAuth}/>} /> */}
         <Route
           path="/login"
           element={
