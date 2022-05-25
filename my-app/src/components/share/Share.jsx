@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import {React, useState, useContext } from "react";
 import "./share.css";
 import { PermMedia, Label, Room, EmojiEmotions, SplitscreenOutlined } from "@mui/icons-material";
 import SendSharpIcon from "@mui/icons-material/SendSharp";
@@ -7,35 +6,25 @@ import TagIcon from "@mui/icons-material/Tag";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import IconButton from "@mui/material/IconButton";
 import ImageUploading from "react-images-uploading";
-
+import AppContext from "../../context/appContext";
 
 export default function Share(props) {
+  const { user } = useContext(AppContext)
   const [image, setImage] = useState("")
-
   const [images, setImages] = useState([]);
+  const [input, setInput] = useState("");
+  const [hashtag, setHashtag] = useState("");
+
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    // console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
-
-  // const split = (images[0].data_url.split(','))
-  // console.log(split[0])
-
   const handleImage = async (e) => {
     e.preventDefault();
     let splitted = images[0].data_url.split(",")[1]
     console.log(splitted)
     setImage(splitted)
   }
-
-
-
-  const [input, setInput] = useState("");
-  const [hashtag, setHashtag] = useState("");
-  const [user, setUser] = useState({ id: 1, username: "jah123" });
-  const [profile_pic, setProfile_pic] = useState(props.userInfo.profile_pic);
 
   const createPost = async (e) => {
     if (input === "") return;
@@ -45,7 +34,7 @@ export default function Share(props) {
       hashtag: hashtag,
       image: image,
       description: input,
-      user_id: user.id,
+      user_id: user.user_id,
       username: user.username,
     };
 
@@ -58,7 +47,7 @@ export default function Share(props) {
     });
     const parsed = await result.json();
     parsed.data[0].username = user.username;
-    parsed.data[0].profile_pic = props.userInfo.profile_pic;
+    parsed.data[0].profile_pic = user.profile_pic;
     props.setPosts([parsed.data[0], ...props.post]);
     setInput("");
   };
@@ -77,7 +66,7 @@ export default function Share(props) {
         <div className="shareTop">
           <img
             className="shareProfileImg"
-            src={props.userInfo.profile_pic}
+            src={user.profile_pic}
             alt="Profile Pic"
           />
           <input

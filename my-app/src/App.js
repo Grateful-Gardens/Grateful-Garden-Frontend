@@ -40,7 +40,6 @@ function App() {
   return (
     <div>
       <Routes>
-        {/* <Route path="/" element={<Home setAuth={setAuth}/>} /> */}
         <Route
           path="/"
           element={
@@ -62,7 +61,6 @@ function App() {
             )
           }
         />
-        {/* <Route path="/profile" element={<Profile setAuth={setAuth}/>} /> */}
         <Route
           path="/login"
           element={

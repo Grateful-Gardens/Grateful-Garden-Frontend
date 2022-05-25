@@ -37,6 +37,7 @@ export default function Profile({setAuth}) {
             </div>
             <div className="profileInfo">
               <h4 className="profileInfoName">{userInfo.username}</h4>
+              
               <span className="profileInfoDesc">{userInfo.bio}</span>
             </div>
           </div>

@@ -1,11 +1,17 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
+import AppContext from "../../context/appContext";
 
 export default function Login({ setAuth }) {
+  const { setUser } = useContext(AppContext)
+
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,9 +27,11 @@ export default function Login({ setAuth }) {
       body: JSON.stringify(loginData),
     });
     const data = await res.json();
+    console.log(data)
     if (data.token) {
       window.localStorage.setItem("token", data.token);
       setAuth(true);
+      setUser(data.user)
     } else {
       setAuth(false);
     }
