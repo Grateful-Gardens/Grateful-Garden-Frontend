@@ -6,9 +6,9 @@ import Feed from "../../components/feed/Feed";
 import MyFeed from "../../components/myFeed/MyFeed.jsx";
 import Rightbar from "../../components/rightbar/Rightbar";
 
-export default function Profile() {
+export default function Profile({setAuth}) {
   const [userInfo, setUserInfo] = useState([]);
-  const [user, setUser] = useState(1 )
+  const [user, setUser] = useState(1)
 
   useEffect(() => {
     fetch(`http://localhost:9001/users/${user}`)
@@ -18,7 +18,7 @@ export default function Profile() {
 
   return (
     <>
-      <Topbar key={userInfo.user_id} userInfo={userInfo}/>
+      <Topbar key={userInfo.user_id} userInfo={userInfo} setAuth={setAuth}/>
       <div className="profile">
         <Sidebar />
         <div className="profileRight">

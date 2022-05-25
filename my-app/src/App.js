@@ -52,7 +52,7 @@ function App() {
           }
         /> */}
         <Route path="/bookmarks" element={<Bookmarks />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile setAuth={setAuth}/>} />
         <Route
           path="/login"
           element={

@@ -1,13 +1,38 @@
 import React from "react";
 import { useState } from "react";
 import "./share.css";
-import { PermMedia, Label, Room, EmojiEmotions } from "@mui/icons-material";
+import { PermMedia, Label, Room, EmojiEmotions, SplitscreenOutlined } from "@mui/icons-material";
 import SendSharpIcon from "@mui/icons-material/SendSharp";
 import TagIcon from "@mui/icons-material/Tag";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import IconButton from "@mui/material/IconButton";
+import ImageUploading from "react-images-uploading";
+
 
 export default function Share(props) {
+  const [image, setImage] = useState("")
+
+  const [images, setImages] = useState([]);
+  const maxNumber = 69;
+  const onChange = (imageList, addUpdateIndex) => {
+    // data for submit
+    // console.log(imageList, addUpdateIndex);
+    setImages(imageList);
+  };
+
+  // const split = (images[0].data_url.split(','))
+  // console.log(split[0])
+
+  const handleImage = async (e) => {
+    e.preventDefault();
+    let splitted = images[0].data_url.split(",")[1]
+    console.log(splitted)
+    setImage(splitted)
+
+  }
+
+
+
   const [input, setInput] = useState("");
   const [hashtag, setHashtag] = useState("");
   const [user, setUser] = useState({ id: 1, username: "jah123" });
@@ -15,10 +40,11 @@ export default function Share(props) {
 
   const createPost = async (e) => {
     if (input === "") return;
+    if (image === "") setImage("");
 
     const postInfo = {
       hashtag: hashtag,
-      image: "",
+      image: image,
       description: input,
       user_id: user.id,
       username: user.username,
@@ -67,9 +93,48 @@ export default function Share(props) {
           <div className="shareOptions">
             <div className="shareOption">
               {/* <PermMedia htmlColor="tomato" className="shareIcon" /> */}
-              <IconButton aria-label="delete">
+              {/* <IconButton aria-label="delete">
                 <PhotoCameraIcon htmlColor="#2e7865" className="shareIcon" />
-              </IconButton>
+              </IconButton> */}
+              <div>
+        <ImageUploading
+          value={images}
+          onChange={onChange}
+          maxNumber={maxNumber}
+          dataURLKey="data_url"
+        >
+          {({
+            imageList,
+            onImageUpload,
+            onImageRemoveAll,
+            onImageUpdate,
+            onImageRemove,
+            isDragging,
+            dragProps,
+          }) => (
+            // write your building UI
+            <div className="upload__image-wrapper">
+              <button
+                style={isDragging ? { color: "red" } : null}
+                onClick={onImageUpload}
+                {...dragProps}
+              >
+                Click or Drop here
+              </button>
+              &nbsp;
+              {imageList.map((image, index) => (
+                <div key={index} className="image-item">
+                  <img src={image.data_url} alt="" width="100" />
+                  <div className="image-item__btn-wrapper">
+                    <button onClick={() => onImageRemove(index)}>Remove</button>
+                    <button type="submit" onClick={handleImage}>Submit</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </ImageUploading>
+      </div>
               {/* <input type="file"/> */}
               <span className="shareOptionText">Photo</span>
             </div>
