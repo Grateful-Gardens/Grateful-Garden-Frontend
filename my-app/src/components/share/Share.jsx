@@ -28,7 +28,6 @@ export default function Share(props) {
     let splitted = images[0].data_url.split(",")[1]
     console.log(splitted)
     setImage(splitted)
-
   }
 
 
