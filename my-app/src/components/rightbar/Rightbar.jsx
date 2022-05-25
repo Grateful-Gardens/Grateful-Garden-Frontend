@@ -5,6 +5,7 @@ import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 export default function Rightbar({ profile, userInfo, setUserInfo }) {
   const [friends, setFriends] = useState([]);
@@ -64,7 +65,8 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
       if (newUserInfo.bio === "") newUserInfo.bio = userInfo.bio;
       if (newUserInfo.city === "") newUserInfo.city = userInfo.city;
       if (newUserInfo.country === "") newUserInfo.country = userInfo.country;
-      if (newUserInfo.longer_bio === "") newUserInfo.longer_bio = userInfo.longer_bio;
+      if (newUserInfo.longer_bio === "")
+        newUserInfo.longer_bio = userInfo.longer_bio;
 
       await fetch(`http://localhost:9001/profile/${user}`, {
         method: "PUT",
@@ -84,7 +86,9 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
     return (
       <>
         <h4 className="rightbarTitle">
-          User information{" "}
+          User information {/* {userInfo.user_id === profile.user_id && ( */}
+          <PersonAddIcon className="add_friend" />
+          {/* )} */}
           <EditIcon
             className="edit"
             type="button"

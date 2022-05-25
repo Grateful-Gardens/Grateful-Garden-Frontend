@@ -26,7 +26,6 @@ export default function Signup() {
       body: JSON.stringify(userInfo),
     });
     const parsed = await result.json();
-    console.log(parsed)
     navigate("/login", { replace: true });
   };
 

@@ -1,26 +1,20 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext} from "react";
 import Topbar from '../../components/topbar/Topbar.jsx'
 import Sidebar from '../../components/sidebar/Sidebar.jsx'
 import Feed from '../../components/feed/Feed.jsx'
 import Rightbar from '../../components/rightbar/Rightbar.jsx'
 import './home.css'
+import AppContext from "../../context/appContext";
+
 
 export default function Home({setAuth}) {
-  const [userInfo, setUserInfo] = useState([]);
-  const [user, setUser] = useState(1)
-
-  useEffect(() => {
-    fetch(`http://localhost:9001/users/${user}`)
-      .then((response) => response.json())
-      .then((data) => setUserInfo(data.data));
-  }, []);
-
+  const { user } = useContext(AppContext)
   return (
     <>
-      <Topbar key={userInfo.user_id} userInfo={userInfo} setAuth={setAuth}/>
+      <Topbar key={user.user_id} userInfo={user} setAuth={setAuth}/>
       <div className="homeContainer">
         <Sidebar />
-        <Feed key={userInfo.user_id} userInfo={userInfo}/>
+        <Feed key={user.user_id} userInfo={user}/>
         <Rightbar/>
       </div>
     </>
