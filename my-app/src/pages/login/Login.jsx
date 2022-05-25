@@ -27,7 +27,9 @@ export default function Login({ setAuth }) {
     } else {
       setAuth(false);
     }
-    navigate("/", { replace: true });
+    if (data.rows && data.rows.length > 1) {
+      navigate("/", { replace: true });
+    }
     setEmail("");
     setPassword("");
   };
