@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import "./rightbar.css";
 import Online from "../online/Online";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
@@ -6,13 +6,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import AppContext from "../../context/appContext";
+
 
 export default function Rightbar({ profile, userInfo, setUserInfo }) {
   const [friends, setFriends] = useState([]);
-  const [user, setUser] = useState(1);
+  const { user } = useContext(AppContext)
 
   useEffect(() => {
-    fetch(`http://localhost:9001/users/${user}/friends`)
+    fetch(`http://localhost:9001/users/${user.user_id}/friends`)
       .then((response) => response.json())
       .then((data) => setFriends(data));
   }, []);
@@ -33,7 +35,7 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
         />
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
-          {friends.map((u) => (
+          {friends.length > 0 && friends.map((u) => (
             <Online key={u.user_id} user={u} />
           ))}
         </ul>
@@ -42,7 +44,7 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
   };
 
   const ProfileRightbar = () => {
-    const [user, setUser] = useState(1);
+  const { user } = useContext(AppContext)
     const [bio, setBio] = useState("");
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
@@ -53,22 +55,22 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
         return;
 
       const newUserInfo = {
-        username: userInfo.username,
-        profile_pic: userInfo.profile_pic,
-        cover_pic: userInfo.cover_pic,
+        username: user.username,
+        profile_pic: user.profile_pic,
+        cover_pic: user.cover_pic,
         bio,
         city,
         country,
         longer_bio,
       };
 
-      if (newUserInfo.bio === "") newUserInfo.bio = userInfo.bio;
-      if (newUserInfo.city === "") newUserInfo.city = userInfo.city;
-      if (newUserInfo.country === "") newUserInfo.country = userInfo.country;
+      if (newUserInfo.bio === "") newUserInfo.bio = user.bio;
+      if (newUserInfo.city === "") newUserInfo.city = user.city;
+      if (newUserInfo.country === "") newUserInfo.country = user.country;
       if (newUserInfo.longer_bio === "")
-        newUserInfo.longer_bio = userInfo.longer_bio;
+        newUserInfo.longer_bio = user.longer_bio;
 
-      await fetch(`http://localhost:9001/profile/${user}`, {
+      await fetch(`http://localhost:9001/profile/${user.user_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

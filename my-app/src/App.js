@@ -6,7 +6,7 @@ import Signup from "./pages/signup/Signup.jsx";
 import { React, useState, useEffect } from "react";
 // import Register from "./pages/register/Register";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import Bookmarks from "./pages/bookmarks/Bookmarks";
+import Chats from "./pages/chats/Chats";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,18 +46,27 @@ function App() {
             !isAuthenticated ? (
               <Navigate replace to="/login" />
             ) : (
-              <Home setAuth={setAuth}/>
+              <Home setAuth={setAuth} />
             )
           }
         />
-        <Route path="/bookmarks" element={<Bookmarks />} />
+        <Route
+          path="/chats"
+          element={
+            !isAuthenticated ? (
+              <Navigate replace to="/login" />
+            ) : (
+              <Chats setAuth={setAuth} />
+            )
+          }
+        />
         <Route
           path="/profile"
           element={
             !isAuthenticated ? (
               <Navigate replace to="/login" />
             ) : (
-              <Profile setAuth={setAuth}/>
+              <Profile setAuth={setAuth} />
             )
           }
         />
@@ -71,8 +80,8 @@ function App() {
             )
           }
         />
-
         <Route path="/signup" element={<Signup />} />
+        <Route path="/chats/:id" element={<Chats />} />
       </Routes>
     </div>
   );

@@ -1,13 +1,14 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useContext } from "react";
 import "./sidebar.css";
-import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
 import { RssFeed, Bookmark, HelpOutline, Event, FunctionsRounded } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import AppContext from "../../context/appContext";
+import ChatIcon from '@mui/icons-material/Chat';
 
 export default function Sidebar() {
   const [friends, setFriends] = useState([]);
-  const [user, setUser] = useState(1)
+  const { user } = useContext(AppContext)
 
   useEffect(() => {
     fetch(`http://localhost:9001/users/${user}/friends`)
@@ -25,10 +26,10 @@ export default function Sidebar() {
               <span className="sidebarListItemText">Feed</span>
             </li>
           </Link>
-          <Link to="/bookmarks" className="link">
+          <Link to="/chats" className="link">
             <li className="sidebarListItem">
-              <Bookmark className="sidebarIcon" />
-              <span className="sidebarListItemText">Bookmarks</span>
+              <ChatIcon className="sidebarIcon" />
+              <span className="sidebarListItemText">Chats</span>
             </li>
           </Link>
           <li className="sidebarListItem">
@@ -38,7 +39,7 @@ export default function Sidebar() {
         </ul>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-          {friends.map((f) => (
+          {friends.length > 0 && friends.map((f) => (
             <CloseFriend key={f.user_id} friend={f} />
           ))}
         </ul>
