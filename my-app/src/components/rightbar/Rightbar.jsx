@@ -7,7 +7,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AppContext from "../../context/appContext";
-
+import { useParams } from "react-router-dom";
 
 export default function Rightbar({ profile, userInfo, setUserInfo }) {
   const [friends, setFriends] = useState([]);
@@ -44,7 +44,9 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
   };
 
   const ProfileRightbar = () => {
-  const { user } = useContext(AppContext)
+    // console.log(userInfo)
+  // const { user } = useContext(AppContext)
+  // console.log(user)
     const [bio, setBio] = useState("");
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
@@ -55,22 +57,22 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
         return;
 
       const newUserInfo = {
-        username: user.username,
-        profile_pic: user.profile_pic,
-        cover_pic: user.cover_pic,
+        username: userInfo.username,
+        profile_pic: userInfo.profile_pic,
+        cover_pic: userInfo.cover_pic,
         bio,
         city,
         country,
         longer_bio,
       };
 
-      if (newUserInfo.bio === "") newUserInfo.bio = user.bio;
-      if (newUserInfo.city === "") newUserInfo.city = user.city;
-      if (newUserInfo.country === "") newUserInfo.country = user.country;
+      if (newUserInfo.bio === "") newUserInfo.bio = userInfo.bio;
+      if (newUserInfo.city === "") newUserInfo.city = userInfo.city;
+      if (newUserInfo.country === "") newUserInfo.country = userInfo.country;
       if (newUserInfo.longer_bio === "")
-        newUserInfo.longer_bio = user.longer_bio;
+        newUserInfo.longer_bio = userInfo.longer_bio;
 
-      await fetch(`http://localhost:9001/profile/${user.user_id}`, {
+      await fetch(`http://localhost:9001/profile/${userInfo.user_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -78,7 +80,10 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
         body: JSON.stringify(newUserInfo),
       });
 
-      setUserInfo(newUserInfo);
+      setUserInfo({
+        ...userInfo, 
+        ...newUserInfo
+      });
       setBio("");
       setCity("");
       setCountry("");
@@ -89,14 +94,16 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
       <>
         <h4 className="rightbarTitle">
           User information {/* {userInfo.user_id === profile.user_id && ( */}
+          {user.user_id !== userInfo.user_id && (
           <PersonAddIcon className="add_friend" />
+          )}
           {/* )} */}
-          <EditIcon
+          {user.user_id == userInfo.user_id && (<EditIcon
             className="edit"
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
-          />{" "}
+          />)}
           <div
             className="modal fade"
             id="exampleModal"
@@ -215,7 +222,7 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
             <span className="rightbarInfoValue">{userInfo.longer_bio}</span>
           </div>
         </div>
-        <h4 className="rightbarTitle">Garden Owners You Follow</h4>
+        {/* <h4 className="rightbarTitle">Garden Owners You Follow</h4>
         <div className="rightbarFollowings">
           <div className="rightbarFollowing">
             <img
@@ -233,7 +240,7 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
             />
             <span className="rightbarFollowingName">John Carter</span>
           </div>
-        </div>
+        </div> */}
       </>
     );
   };
