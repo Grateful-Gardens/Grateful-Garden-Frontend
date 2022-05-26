@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Topbar({ userInfo, setAuth }) {
   const navigate = useNavigate()
+  console.log(userInfo)
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -49,7 +50,7 @@ export default function Topbar({ userInfo, setAuth }) {
             <span className="topbarIconBadge">1</span>
           </div>
         </div> */}
-        <Link to="/profile" className="profile">
+        <Link to={`/profile/${userInfo.user_id}`} className="profile">
           <img
             src={userInfo.profile_pic}
             alt=""

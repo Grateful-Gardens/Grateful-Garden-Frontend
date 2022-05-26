@@ -19,7 +19,6 @@ export default function Post({ post, posts, setPosts, userInfo }) {
   const [comments, setComments] = useState([]);
   const [reply, setReply] = useState("");
   const [showComment, setShowComment] = useState(false);
-  // const [user, setUser] = useState(1);
 
   const handleComments = async (e) => {
     setShowComment(!showComment);
@@ -30,61 +29,10 @@ export default function Post({ post, posts, setPosts, userInfo }) {
       });
   };
 
-  const addLike = async (e) => {
-    const likeInfo = {};
-
-    await fetch(`http://localhost:9001/posts/${post.post_id}/likes`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(),
-    });
-  };
-
   const likeHandler = () => {
     setLike(isLiked ? Number(like) - 1 : Number(like) + 1);
     setIsLiked(!isLiked);
   };
-
-  // const handleBookmark = async (e) => {
-  //   !isBookmarked ? setIsBookmarked(true) : setIsBookmarked(false);
-  //   if (!isBookmarked) {
-  //     try {
-  //       const data = {
-  //         user_id: user,
-  //         post_id: post.post_id,
-  //       };
-  //       await fetch(`http://localhost:9001/users/${user}/bookmarks`, {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(data),
-  //       });
-  //       console.log("Added to your bookmarks");
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   } else {
-  //     try {
-  //       const data = {
-  //         user_id: user,
-  //         post_id: post.post_id,
-  //       };
-  //       await fetch(`http://localhost:9001/users/${user}/bookmarks`, {
-  //         method: "DELETE",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(data),
-  //       });
-  //       console.log("Removed Bookmark");
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // };
 
   const handleDelete = async (e) => {
     try {
@@ -136,7 +84,7 @@ export default function Post({ post, posts, setPosts, userInfo }) {
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <Link to="/profile">
+            <Link to={`/profile/${post.user_id}`}>
             <img
               className="postProfileImg"
               //   src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}

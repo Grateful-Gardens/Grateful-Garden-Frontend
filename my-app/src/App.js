@@ -6,7 +6,7 @@ import Signup from "./pages/signup/Signup.jsx";
 import { React, useState, useEffect } from "react";
 // import Register from "./pages/register/Register";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import Chats from "./pages/chats/Chats";
+// import Bookmarks from "./pages/bookmarks/Bookmarks";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -40,36 +40,19 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route
+        <Route path="/" element={<Home setAuth={setAuth}/>} />
+        {/* <Route
           path="/"
           element={
             !isAuthenticated ? (
-              <Navigate replace to="/login" />
+              <Login setAuth={setAuth} />
             ) : (
-              <Home setAuth={setAuth} />
+              <Navigate replace to="/" />
             )
           }
-        />
-        <Route
-          path="/chats"
-          element={
-            !isAuthenticated ? (
-              <Navigate replace to="/login" />
-            ) : (
-              <Chats setAuth={setAuth} />
-            )
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            !isAuthenticated ? (
-              <Navigate replace to="/login" />
-            ) : (
-              <Profile setAuth={setAuth} />
-            )
-          }
-        />
+        /> */}
+        {/* <Route path="/bookmarks" element={<Bookmarks />} /> */}
+        <Route path="/profile/:id" element={<Profile />} />
         <Route
           path="/login"
           element={
@@ -80,8 +63,8 @@ function App() {
             )
           }
         />
+
         <Route path="/signup" element={<Signup />} />
-        <Route path="/chats/:id" element={<Chats />} />
       </Routes>
     </div>
   );

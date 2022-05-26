@@ -6,20 +6,26 @@ import Feed from "../../components/feed/Feed";
 import MyFeed from "../../components/myFeed/MyFeed.jsx";
 import Rightbar from "../../components/rightbar/Rightbar";
 import AppContext from "../../context/appContext";
+import { useParams } from "react-router-dom";
+
 
 export default function Profile({setAuth}) {
-  // const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState([]);
+  const { id } = useParams();
   const { user, setUser } = useContext(AppContext)
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:9001/users/${user}`)
-  //     .then((response) => response.json())
-  //     .then((data) => setUserInfo(data.data));
-  // }, []);
+
+  useEffect(() => {
+    if (!id ) return 
+    fetch(`http://localhost:9001/profile/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUserInfo(data.data[0])});
+  }, [id]);
 
   return (
     <>
-      <Topbar key={user.user_id} userInfo={user} setAuth={setAuth}/>
+      <Topbar key={id} userInfo={user} setAuth={setAuth}/>
       <div className="profile">
         <Sidebar />
         <div className="profileRight">
@@ -27,24 +33,24 @@ export default function Profile({setAuth}) {
             <div className="profileCover">
               <img
                 className="profileCoverImg"
-                src={user.cover_pic}
+                src={userInfo.cover_pic}
                 alt=""
               />
               <img
                 className="profileUserImg"
-                src={user.profile_pic}
+                src={userInfo.profile_pic}
                 alt=""
               />
             </div>
             <div className="profileInfo">
-              <h4 className="profileInfoName">{user.username}</h4>
+              <h4 className="profileInfoName">{userInfo.username}</h4>
               
-              <span className="profileInfoDesc">{user.bio}</span>
+              <span className="profileInfoDesc">{userInfo.bio}</span>
             </div>
           </div>
           <div className="profileRightBottom">
-            <MyFeed userInfo={user}/>
-            <Rightbar profile key={user.user_id} userInfo={user} setUserInfo={setUser}/>
+            <MyFeed userInfo={userInfo}/>
+            <Rightbar profile key={id} userInfo={userInfo} setUserInfo={setUserInfo}/>
           </div>
         </div>
       </div>

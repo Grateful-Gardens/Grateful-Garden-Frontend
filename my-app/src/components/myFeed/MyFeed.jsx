@@ -7,8 +7,9 @@ import AppContext from "../../context/appContext";
 export default function MyFeed({ userInfo }) {
   const [allMyPosts, setAllMyPosts] = useState([]);
   const [posts, setPosts] = useState([]);
-
   const { user, setUser } = useContext(AppContext)
+  console.log(userInfo)
+
   useEffect(() => {
     fetch("http://localhost:9001/posts")
       .then((response) => response.json())
@@ -16,17 +17,19 @@ export default function MyFeed({ userInfo }) {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:9001/posts/${user.user_id}`)
+    if (!userInfo.user_id) return 
+    fetch(`http://localhost:9001/posts/${userInfo.user_id}`)
       .then((response) => response.json())
-      .then((data) => setAllMyPosts(data.data));
-  }, []);
+      .then((data) => {
+        setAllMyPosts(data.data)});
+      
+  }, [userInfo.user_id]);
 
-  
-
+    
   return (
     <div className="feed">
       <div className="feedWrapper">
-        {allMyPosts.length > 0 && allMyPosts.map((mP) => (
+        {allMyPosts && allMyPosts.map((mP) => (
           <MyPosts key={mP.post_id} post={mP} posts={posts} setPosts={setPosts} setAllMyPosts={setAllMyPosts} userInfo={user} allMyPosts={allMyPosts}/>
         ))}
       </div>

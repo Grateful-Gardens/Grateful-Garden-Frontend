@@ -78,7 +78,6 @@ export default function MyPosts({ post, posts, setPosts, setAllMyPosts, userInfo
           <div className="postTopLeft">
             <img
               className="postProfileImg"
-              //   src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
               src={post.profile_pic}
               alt=""
             />
