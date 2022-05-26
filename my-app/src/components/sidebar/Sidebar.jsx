@@ -9,12 +9,13 @@ import ChatIcon from '@mui/icons-material/Chat';
 export default function Sidebar() {
   const [friends, setFriends] = useState([]);
   const { user } = useContext(AppContext)
+  const [allUsers, setAllUsers] = useState([])
 
   useEffect(() => {
     fetch(`http://localhost:9001/users/${user.user_id}/friends`)
       .then((response) => response.json())
       .then((data) => setFriends(data));
-  }, []);
+  }, [friends]);
 
   return (
     <div className="sidebar">

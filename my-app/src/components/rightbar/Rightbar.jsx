@@ -112,10 +112,12 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
       <>
         <h4 className="rightbarTitle">
           User information {/* {userInfo.user_id === profile.user_id && ( */}
-          {user.user_id !== userInfo.user_id && (!friends.includes(userInfo.user_id)) && (
+          {/* {user.user_id !== userInfo.user_id && (!friends.includes(userInfo.user_id)) && (
+            <PersonAddIcon className="add_friend" onClick={handleFriend} />
+          )} */}
+          {user.user_id !== userInfo.user_id && (!friends.some(f => f.user_id === userInfo.user_id)) && (
             <PersonAddIcon className="add_friend" onClick={handleFriend} />
           )}
-
 
           {/* )} */}
           {user.user_id == userInfo.user_id && (
