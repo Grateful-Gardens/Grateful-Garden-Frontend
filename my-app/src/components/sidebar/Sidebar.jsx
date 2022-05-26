@@ -11,7 +11,7 @@ export default function Sidebar() {
   const { user } = useContext(AppContext)
 
   useEffect(() => {
-    fetch(`http://localhost:9001/users/${user}/friends`)
+    fetch(`http://localhost:9001/users/${user.user_id}/friends`)
       .then((response) => response.json())
       .then((data) => setFriends(data));
   }, []);
@@ -40,7 +40,7 @@ export default function Sidebar() {
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
           {friends.length > 0 && friends.map((f) => (
-            <CloseFriend key={f.user_id} friend={f} />
+            <CloseFriend key={f.user_id} friend={f} userInfo={user} setFriends={setFriends} allFriends={friends}/>
           ))}
         </ul>
       </div>

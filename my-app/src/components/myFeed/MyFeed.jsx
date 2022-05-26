@@ -8,7 +8,6 @@ export default function MyFeed({ userInfo }) {
   const [allMyPosts, setAllMyPosts] = useState([]);
   const [posts, setPosts] = useState([]);
   const { user, setUser } = useContext(AppContext)
-  console.log(userInfo)
 
   useEffect(() => {
     fetch("http://localhost:9001/posts")

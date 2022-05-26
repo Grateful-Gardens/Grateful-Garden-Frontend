@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Topbar({ userInfo, setAuth }) {
   const navigate = useNavigate()
-  console.log(userInfo)
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
