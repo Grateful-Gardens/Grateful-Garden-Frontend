@@ -7,6 +7,7 @@ import { React, useState, useEffect } from "react";
 // import Register from "./pages/register/Register";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 // import Bookmarks from "./pages/bookmarks/Bookmarks";
+import LoginSignup from "./pages/LoginSignup"
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -41,7 +42,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Home setAuth={setAuth}/>} />
-        {/* <Route
+         <Route
           path="/"
           element={
             !isAuthenticated ? (
@@ -50,8 +51,8 @@ function App() {
               <Navigate replace to="/" />
             )
           }
-        /> */}
-        {/* <Route path="/bookmarks" element={<Bookmarks />} /> */}
+        /> 
+        {/* <Route path="/bookmarks" element={<Bookmarks />} />  */}
         <Route path="/profile/:id" element={<Profile />} />
         <Route
           path="/login"
