@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 // import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function Post({ post, posts, setPosts, userInfo }) {
   const [like, setLike] = useState(post.like_count);
@@ -56,7 +57,6 @@ export default function Post({ post, posts, setPosts, userInfo }) {
       user_id: userInfo.user_id,
       post_id: post.post_id,
     };
-    console.log(data)
 
     const result = await fetch(
       `http://localhost:9001/posts/${post.post_id}/comments`,
@@ -76,8 +76,8 @@ export default function Post({ post, posts, setPosts, userInfo }) {
   };
 
   const handleClick = (e) => {
-    console.log(post.user_id)
-  }
+    console.log(post.user_id);
+  };
 
   return (
     <div className="post">
@@ -85,15 +85,17 @@ export default function Post({ post, posts, setPosts, userInfo }) {
         <div className="postTop">
           <div className="postTopLeft">
             <Link to={`/profile/${post.user_id}`}>
-            <img
-              className="postProfileImg"
-              //   src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
-              src={post.profile_pic}
-              alt=""
-              onClick={handleClick}
-            />
-            </Link >
-            <span className="postUsername" onClick={handleClick}>{post.username}</span>
+              <img
+                className="postProfileImg"
+                //   src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
+                src={post.profile_pic}
+                alt=""
+                onClick={handleClick}
+              />
+            </Link>
+            <span className="postUsername" onClick={handleClick}>
+              {post.username}
+            </span>
             <span className="postDate">
               {DateTime.fromISO(post.time_posted).toRelative()}
             </span>
@@ -101,8 +103,8 @@ export default function Post({ post, posts, setPosts, userInfo }) {
           <div className="postTopRight">
             {post.user_id === userInfo.user_id && (
               <IconButton aria-label="delete">
-              <DeleteIcon type="submit" onClick={handleDelete} />
-            </IconButton>
+                <DeleteIcon type="submit" onClick={handleDelete} />
+              </IconButton>
             )}
             {/* <IconButton aria-label="delete">
               <BookmarkAddOutlinedIcon onClick={handleBookmark} />
@@ -119,12 +121,20 @@ export default function Post({ post, posts, setPosts, userInfo }) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-          <IconButton aria-label="delete">
-          <FavoriteBorderTwoToneIcon
-              htmlColor="#2e7865"
-              className="likeIcon"
-              onClick={likeHandler}
-            />
+            <IconButton aria-label="delete">
+              {!isLiked ? (
+                <FavoriteBorderTwoToneIcon
+                  htmlColor="#2e7865"
+                  className="likeIcon"
+                  onClick={likeHandler}
+                />
+              ) : (
+                <FavoriteIcon
+                  htmlColor="#2e7865"
+                  className="likeIcon"
+                  onClick={likeHandler}
+                />
+              )}
             </IconButton>
             <span className="postLikeCounter">{like} likes</span>
           </div>

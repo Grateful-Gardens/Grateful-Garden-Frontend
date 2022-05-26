@@ -27,7 +27,6 @@ export default function Login({ setAuth }) {
       body: JSON.stringify(loginData),
     });
     const data = await res.json();
-    console.log(data)
     if (data.token) {
       window.localStorage.setItem("token", data.token);
       setAuth(true);

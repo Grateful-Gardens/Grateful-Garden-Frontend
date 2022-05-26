@@ -87,9 +87,11 @@ export default function MyPosts({ post, posts, setPosts, setAllMyPosts, userInfo
             </span>
           </div>
           <div className="postTopRight">
-            <IconButton aria-label="delete">
+          {post.user_id === userInfo.user_id && (
+              <IconButton aria-label="delete">
               <DeleteIcon type="submit" onClick={handleDelete} />
             </IconButton>
+            )}
           </div>
           {/* <div className="postTopRight">
             <BookmarkAddedIcon onClick={handleBookmark} />

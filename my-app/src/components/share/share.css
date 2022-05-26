@@ -1,6 +1,6 @@
 .share {
   width: 100%;
-  height: 170px;
+  height: 140px;
   border-radius: 10px;
   -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
   box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
@@ -34,6 +34,8 @@
 
 .shareHr {
   margin: 20px;
+  margin-bottom: -0px;
+  margin-right: 10px;
 }
 
 .shareBottom {

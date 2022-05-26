@@ -8,10 +8,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AppContext from "../../context/appContext";
 import { useParams } from "react-router-dom";
+import ReactEmbedGist from "react-embed-gist";
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 export default function Rightbar({ profile, userInfo, setUserInfo }) {
   const [friends, setFriends] = useState([]);
-  const { user } = useContext(AppContext)
+  const { user } = useContext(AppContext);
 
   useEffect(() => {
     fetch(`http://localhost:9001/users/${user.user_id}/friends`)
@@ -25,28 +27,29 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
         <div className="birthdayContainer">
           <LocalFloristIcon htmlColor="#2e7865" className="birthdayImg" />
           <span className="birthdayText">
-            <b>New Garden</b> just <b>dropped</b> come check it out!
+            <b>Check out</b> some <b>community gardens</b> near you!
           </span>
         </div>
-        <img
+        {/* <img
           className="rightbarAd"
           src="https://foodtank.com/wp-content/uploads/2021/09/Food-Tank-Aberdeen-Street-Community-Garden.jpg"
           alt=""
+        /> */}
+        <ReactEmbedGist
+          className="rightbarAd"
+          gist="jah821/21e85cfad2ebfacdacccfd2b45b55b06"
         />
-        <h4 className="rightbarTitle">Online Friends</h4>
+        {/* <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
           {friends.length > 0 && friends.map((u) => (
             <Online key={u.user_id} user={u} />
           ))}
-        </ul>
+        </ul> */}
       </>
     );
   };
 
   const ProfileRightbar = () => {
-    // console.log(userInfo)
-  // const { user } = useContext(AppContext)
-  // console.log(user)
     const [bio, setBio] = useState("");
     const [city, setCity] = useState("");
     const [country, setCountry] = useState("");
@@ -81,8 +84,8 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
       });
 
       setUserInfo({
-        ...userInfo, 
-        ...newUserInfo
+        ...userInfo,
+        ...newUserInfo,
       });
       setBio("");
       setCity("");
@@ -90,20 +93,39 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
       setLonger_bio("");
     };
 
+    const handleFriend = async (e) => {
+      e.preventDefault();
+      const data = {
+        user_id: user.user_id, 
+        friend_two: userInfo.user_id
+      }
+      await fetch(`http://localhost:9001/users/${user.user_id}/friends`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    };
+
     return (
       <>
         <h4 className="rightbarTitle">
           User information {/* {userInfo.user_id === profile.user_id && ( */}
-          {user.user_id !== userInfo.user_id && (
-          <PersonAddIcon className="add_friend" />
+          {user.user_id !== userInfo.user_id && (!friends.includes(userInfo.user_id)) && (
+            <PersonAddIcon className="add_friend" onClick={handleFriend} />
           )}
+
+
           {/* )} */}
-          {user.user_id == userInfo.user_id && (<EditIcon
-            className="edit"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-          />)}
+          {user.user_id == userInfo.user_id && (
+            <EditIcon
+              className="edit"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            />
+          )}
           <div
             className="modal fade"
             id="exampleModal"
@@ -222,25 +244,6 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
             <span className="rightbarInfoValue">{userInfo.longer_bio}</span>
           </div>
         </div>
-        {/* <h4 className="rightbarTitle">Garden Owners You Follow</h4>
-        <div className="rightbarFollowings">
-          <div className="rightbarFollowing">
-            <img
-              src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">John Carter</span>
-          </div>
-          <div className="rightbarFollowing">
-            <img
-              src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
-              alt=""
-              className="rightbarFollowingImg"
-            />
-            <span className="rightbarFollowingName">John Carter</span>
-          </div>
-        </div> */}
       </>
     );
   };

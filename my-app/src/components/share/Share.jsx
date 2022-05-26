@@ -1,6 +1,12 @@
-import {React, useState, useContext } from "react";
+import { React, useState, useContext } from "react";
 import "./share.css";
-import { PermMedia, Label, Room, EmojiEmotions, SplitscreenOutlined } from "@mui/icons-material";
+import {
+  PermMedia,
+  Label,
+  Room,
+  EmojiEmotions,
+  SplitscreenOutlined,
+} from "@mui/icons-material";
 import SendSharpIcon from "@mui/icons-material/SendSharp";
 import TagIcon from "@mui/icons-material/Tag";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
@@ -9,8 +15,8 @@ import ImageUploading from "react-images-uploading";
 import AppContext from "../../context/appContext";
 
 export default function Share(props) {
-  const { user } = useContext(AppContext)
-  const [image, setImage] = useState("")
+  const { user } = useContext(AppContext);
+  const [image, setImage] = useState("");
   const [images, setImages] = useState([]);
   const [input, setInput] = useState("");
   const [hashtag, setHashtag] = useState("");
@@ -21,10 +27,10 @@ export default function Share(props) {
   };
   const handleImage = async (e) => {
     e.preventDefault();
-    let splitted = images[0].data_url.split(",")[1]
-    console.log(splitted)
-    setImage(splitted)
-  }
+    let splitted = images[0].data_url.split(",")[1];
+    console.log(splitted);
+    setImage(splitted);
+  };
 
   const createPost = async (e) => {
     if (input === "") return;
@@ -84,49 +90,53 @@ export default function Share(props) {
               {/* <IconButton aria-label="delete">
                 <PhotoCameraIcon htmlColor="#2e7865" className="shareIcon" />
               </IconButton> */}
-              <div>
-        <ImageUploading
-          value={images}
-          onChange={onChange}
-          maxNumber={maxNumber}
-          dataURLKey="data_url"
-        >
-          {({
-            imageList,
-            onImageUpload,
-            onImageRemoveAll,
-            onImageUpdate,
-            onImageRemove,
-            isDragging,
-            dragProps,
-          }) => (
-            // write your building UI
-            <div className="upload__image-wrapper">
-              <button
-                style={isDragging ? { color: "red" } : null}
-                onClick={onImageUpload}
-                {...dragProps}
-              >
-                Click or Drop here
-              </button>
-              &nbsp;
-              {imageList.map((image, index) => (
-                <div key={index} className="image-item">
-                  <img src={image.data_url} alt="" width="100" />
-                  <div className="image-item__btn-wrapper">
-                    <button onClick={() => onImageRemove(index)}>Remove</button>
-                    <button type="submit" onClick={handleImage}>Submit</button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </ImageUploading>
-      </div>
+              {/* <div>
+                <ImageUploading
+                  value={images}
+                  onChange={onChange}
+                  maxNumber={maxNumber}
+                  dataURLKey="data_url"
+                >
+                  {({
+                    imageList,
+                    onImageUpload,
+                    onImageRemoveAll,
+                    onImageUpdate,
+                    onImageRemove,
+                    isDragging,
+                    dragProps,
+                  }) => (
+                    // write your building UI
+                    <div className="upload__image-wrapper">
+                      <button
+                        style={isDragging ? { color: "red" } : null}
+                        onClick={onImageUpload}
+                        {...dragProps}
+                      >
+                        Click or Drop here
+                      </button>
+                      &nbsp;
+                      {imageList.map((image, index) => (
+                        <div key={index} className="image-item">
+                          <img src={image.data_url} alt="" width="100" />
+                          <div className="image-item__btn-wrapper">
+                            <button onClick={() => onImageRemove(index)}>
+                              Remove
+                            </button>
+                            <button type="submit" onClick={handleImage}>
+                              Submit
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </ImageUploading>
+              </div> */}
               {/* <input type="file"/> */}
-              <span className="shareOptionText">Photo</span>
+              {/* <span className="shareOptionText">Photo</span> */}
             </div>
-            <div className="shareOption">
+            {/* <div className="shareOption">
               <div className="dropdown">
                 <IconButton aria-label="delete">
                   <TagIcon htmlColor="#2e7865" className="shareIcon" />
@@ -150,7 +160,7 @@ export default function Share(props) {
                   </option>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* <div className="shareOption">
               <Room htmlColor="green" className="shareIcon" />
               <span className="shareOptionText">Location</span>
