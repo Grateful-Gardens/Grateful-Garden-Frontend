@@ -19,8 +19,7 @@ export default function Post({ post, posts, setPosts, userInfo }) {
   const [comments, setComments] = useState([]);
   const [reply, setReply] = useState("");
   const [showComment, setShowComment] = useState(false);
-  const [username, setUsername] = useState({ username: "jah123" });
-  const [user, setUser] = useState(1);
+  // const [user, setUser] = useState(1);
 
   const handleComments = async (e) => {
     setShowComment(!showComment);
@@ -106,9 +105,10 @@ export default function Post({ post, posts, setPosts, userInfo }) {
     e.preventDefault();
     const data = {
       comment_body: reply,
-      user_id: user,
+      user_id: userInfo.user_id,
       post_id: post.post_id,
     };
+    console.log(data)
 
     const result = await fetch(
       `http://localhost:9001/posts/${post.post_id}/comments`,
@@ -151,7 +151,7 @@ export default function Post({ post, posts, setPosts, userInfo }) {
             </span>
           </div>
           <div className="postTopRight">
-            {post.user_id === user && (
+            {post.user_id === userInfo.user_id && (
               <IconButton aria-label="delete">
               <DeleteIcon type="submit" onClick={handleDelete} />
             </IconButton>

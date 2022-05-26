@@ -1,15 +1,22 @@
 import "./online.css";
+import { React, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 
 export default function Online({ user }) {
+
+  const handleProfilePicClick = (e) => {
+    console.log(user.user_id)
+  }
+
   return (
     <li className="rightbarFriend">
       <div className="rightbarProfileImgContainer">
-        <img className="rightbarProfileImg" src={user.profile_pic} alt="" />
-        {/* <img
-          className="rightbarProfileImg"
-          src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
-          alt=""
-        /> */}
+        {/* <Link to={`/chats/${user.user_id}`}> */}
+        <Link to={'/profile'}>
+        <img className="rightbarProfileImg" src={user.profile_pic} alt="" onClick={handleProfilePicClick}/>
+        {/* </Link> */}
+        </Link>
         <span className="rightbarOnline"></span>
       </div>
       <span className="rightbarUsername">{user.username}</span>

@@ -7,7 +7,6 @@ import Comments from "../comments/Comments.jsx";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 
-
 export default function MyPosts({ post, posts, setPosts, setAllMyPosts, userInfo, allMyPosts}) {
   const [like, setLike] = useState(post.like_count);
   const [isLiked, setIsLiked] = useState(false);
@@ -15,9 +14,6 @@ export default function MyPosts({ post, posts, setPosts, setAllMyPosts, userInfo
   const [comments, setComments] = useState([]);
   const [reply, setReply] = useState("");
   const [showComment, setShowComment] = useState(false);
-  const [commentsLength, setCommentsLength] = useState(0);
-  const [username, setUsername] = useState({ username: "jah123" });
-  const [user, setUser] = useState(1);
 
   const handleComments = async (e) => {
     setShowComment(!showComment);
@@ -53,9 +49,9 @@ export default function MyPosts({ post, posts, setPosts, setAllMyPosts, userInfo
     e.preventDefault();
     const data = {
       comment_body: reply,
-      user_id: 1,
+      user_id: userInfo.user_id,
       post_id: post.post_id,
-      username: username.username,
+      username: userInfo.username,
     };
 
     const result = await fetch(

@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { DateTime } from "luxon";
 import "./comments.css";
 import List from "@mui/material/List";
@@ -10,9 +10,10 @@ import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
+import AppContext from "../../context/appContext";
 
 export default function Comments({ allComments, aComment, setComments }) {
-  const [user, setUser] = useState(1);
+  const { user } = useContext(AppContext)
 
   const handleDelete = async (e) => {
     try {
@@ -51,7 +52,7 @@ export default function Comments({ allComments, aComment, setComments }) {
                 ></Typography>
                 {allComments.username}{" "}
                 {DateTime.fromISO(allComments.time_posted).toRelative()}
-                {allComments.user_id === user && (
+                {allComments.user_id === user.user_id && (
                   <IconButton aria-label="delete" className="delete-comment">
                     <DeleteIcon
                       className="delete-comment"
