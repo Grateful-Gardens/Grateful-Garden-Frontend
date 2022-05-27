@@ -45,7 +45,7 @@ export default function Sidebar() {
           </li> */}
         {/* <hr className="sidebarHr" /> */}
         <div>
-          <img className="left-image-1" src="https://images.squarespace-cdn.com/content/v1/5429e131e4b010254224c999/1583613440201-IDVDHMX2CANUMRZ75MCX/MG+Logo.png"/>
+          <img className="left-image-1" src="https://media.istockphoto.com/vectors/flower-pot-and-plant-logo-design-vector-id1214870674?k=20&m=1214870674&s=170667a&w=0&h=KCDHlN8aDP4PPZosp20qsfNEC0LitIbpx02q-FXGPPA="/>
         </div>
         <li className="sidebarListItem">
           <PeopleIcon className="sidebarIcon" />

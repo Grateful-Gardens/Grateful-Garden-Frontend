@@ -25,11 +25,10 @@ export default function Share(props) {
   const onChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
   };
+
   const handleImage = async (e) => {
     e.preventDefault();
-    let splitted = images[0].data_url.split(",")[1];
-    console.log(splitted);
-    setImage(splitted);
+    setImage(images[0].data_url);
   };
 
   const createPost = async (e) => {
@@ -38,10 +37,11 @@ export default function Share(props) {
 
     const postInfo = {
       hashtag: hashtag,
-      image: image,
+      image: "",
       description: input,
       user_id: user.user_id,
       username: user.username,
+      upload: image
     };
 
     const result = await fetch("http://localhost:9001/posts", {
@@ -90,7 +90,7 @@ export default function Share(props) {
               {/* <IconButton aria-label="delete">
                 <PhotoCameraIcon htmlColor="#2e7865" className="shareIcon" />
               </IconButton> */}
-              {/* <div>
+              <div>
                 <ImageUploading
                   value={images}
                   onChange={onChange}
@@ -113,7 +113,7 @@ export default function Share(props) {
                         onClick={onImageUpload}
                         {...dragProps}
                       >
-                        Click or Drop here
+                        Upload
                       </button>
                       &nbsp;
                       {imageList.map((image, index) => (
@@ -132,7 +132,7 @@ export default function Share(props) {
                     </div>
                   )}
                 </ImageUploading>
-              </div> */}
+              </div>
               {/* <input type="file"/> */}
               {/* <span className="shareOptionText">Photo</span> */}
             </div>
