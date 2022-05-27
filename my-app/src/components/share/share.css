@@ -11,6 +11,10 @@
   padding: 10px;
 }
 
+.upload-button {
+  max-height: 38px;
+}
+
 .shareTop {
   display: flex;
   align-items: center;

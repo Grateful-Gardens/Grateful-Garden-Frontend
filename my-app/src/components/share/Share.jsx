@@ -24,6 +24,8 @@ export default function Share(props) {
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
+    setImage(imageList[0].data_url);
+
   };
 
   const handleImage = async (e) => {
@@ -107,25 +109,27 @@ export default function Share(props) {
                     dragProps,
                   }) => (
                     // write your building UI
-                    <div className="upload__image-wrapper">
+                    <div className="upload__image-wrapper d-flex">
                       <button
-                        style={isDragging ? { color: "red" } : null}
+                        style={isDragging ? { color: "red" } : null }
                         onClick={onImageUpload}
                         {...dragProps}
+                        className="me-1 btn btn-success mt-2 upload-button"
                       >
                         Upload
                       </button>
                       &nbsp;
                       {imageList.map((image, index) => (
-                        <div key={index} className="image-item">
-                          <img src={image.data_url} alt="" width="100" />
+                        <div key={index} className="image-item d-flex mt-2">
+                          <p className="mx-1 mt-2">{image.file.name}</p>
+                          {/* <img src="" alt={image.file.name} width="100" /> */}
                           <div className="image-item__btn-wrapper">
-                            <button onClick={() => onImageRemove(index)}>
+                            <button className="mx-1 btn btn-danger" onClick={() => onImageRemove(index)}>
                               Remove
                             </button>
-                            <button type="submit" onClick={handleImage}>
-                              Submit
-                            </button>
+                            {/* <button className="mx-1 btn btn-primary" type="submit" onClick={handleImage}>
+                              Confirm
+                            </button> */}
                           </div>
                         </div>
                       ))}
