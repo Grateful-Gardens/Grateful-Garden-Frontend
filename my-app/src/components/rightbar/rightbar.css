@@ -2,9 +2,19 @@
   flex: 3.5;
 }
 
+/* .map {
+  border: 5px solid #2e7865;
+} */
+
 .rightbarWrapper {
   padding: 20px 20px 0 0;
 }
+
+/* .cover {
+  height: 100px;
+  width: 300px;
+  color: #2e7865;
+} */
 
 .birthdayContainer {
   display: flex;

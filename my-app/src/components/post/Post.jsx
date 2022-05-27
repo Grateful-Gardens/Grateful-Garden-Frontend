@@ -1,16 +1,12 @@
 import { React, useEffect, useState } from "react";
 import Comments from "../comments/Comments.jsx";
 import "./post.css";
-import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import FavoriteBorderTwoToneIcon from "@mui/icons-material/FavoriteBorderTwoTone";
-import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import { DateTime } from "luxon";
 import DeleteIcon from "@mui/icons-material/Delete";
-import SendIcon from "@mui/icons-material/Send";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
-// import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function Post({ post, posts, setPosts, userInfo }) {

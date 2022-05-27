@@ -10,23 +10,26 @@ export default function Topbar({ userInfo, setAuth }) {
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
-        <span className="logo">Grateful Gardens</span>
+        <span className="logo" onClick={(e) => navigate("/")}>Grateful Gardens</span>
       </div>
       <div className="topbarCenter">
         <div className="searchbar">
           <Search className="searchIcon" />
           <input
-            placeholder="Search for friend, post or video"
+            placeholder="Search for friend, post or users"
             className="searchInput"
           />
         </div>
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
-          <Link to="/">
-            <span className="topbarLink">Homepage</span>
-          </Link>
           {/* <Link to="/login"> */}
+          <span className="topbarLink" onClick={(e) => {
+              e.preventDefault()
+              setAuth(false)
+              window.localStorage.setItem("token", "")
+              navigate("/")
+            }}>Home</span>
             <span className="topbarLink" onClick={(e) => {
               e.preventDefault()
               setAuth(false)

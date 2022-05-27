@@ -35,10 +35,15 @@ export default function Rightbar({ profile, userInfo, setUserInfo }) {
           src="https://foodtank.com/wp-content/uploads/2021/09/Food-Tank-Aberdeen-Street-Community-Garden.jpg"
           alt=""
         /> */}
+        <div className="map">
         <ReactEmbedGist
           className="rightbarAd"
           gist="jah821/21e85cfad2ebfacdacccfd2b45b55b06"
         />
+        </div>
+        <div className="cover">
+
+        </div>
         {/* <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
           {friends.length > 0 && friends.map((u) => (

@@ -1,5 +1,5 @@
 .sidebar {
-  flex: 2.3;
+  flex: 2;
   height: calc(100vh - 50px);
   overflow-y: scroll;
   position: sticky;
@@ -21,6 +21,33 @@
   background-color: rgb(179, 179, 179);
 }
 
+.friendBar {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.sidebarListItem:hover {
+  color: #2e7865;
+}
+
+.left-image-1 {
+  width: 200px;
+  height: 200px;
+  margin-left: 40px;
+}
+
+.sidebarListItem {
+  /* margin-left: 60px; */
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin-top: 30px;
+  margin-right: 30px;
+
+}
+
 .sidebarWrapper {
   padding: 20px;
 }
@@ -29,6 +56,7 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  
 }
 
 .sidebarListItem {
@@ -40,15 +68,16 @@
 .link {
   list-style: none;
   text-decoration: none;
-  color: black
+  color: black;
 }
 
 .link:hover {
-  color:#2e7865;
+  color: #2e7865;
 }
 
 .sidebarIcon {
   margin-right: 15px;
+  list-style: none;
 }
 
 .sidebarButton {
