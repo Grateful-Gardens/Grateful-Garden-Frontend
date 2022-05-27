@@ -1,6 +1,7 @@
 import { React, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./signup.css";
+import { useNavigate, NavLink } from "react-router-dom";
+// import "./signup.css";
+import "../login/login.css"
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -30,7 +31,91 @@ export default function Signup() {
   };
 
   return (
-    <div className="signup">
+    <div className="page">
+      
+
+      <div className="left-side">
+        <div className="imageDiv">
+        </div>
+      </div>
+
+      <div className="right-side">
+        <span className="logo">Grateful Gardens</span>
+        <div className="pageSwitcherS">
+              <NavLink
+                to="/login"
+                activeClassName="pageSwitcherItem-activeS"
+                className="pageSwitcherItemS"
+              >
+                Sign In
+              </NavLink>
+              <NavLink
+                exact
+                to="/signup"
+                activeClassName="pageSwitcherItem-activeS"
+                className="pageSwitcherItemS"
+              >
+                Sign Up
+              </NavLink>
+         </div>
+              <div className="form-outline">
+               <input
+                type="email"
+                id="form3Example1w"
+                className="form-control"
+                onChange={(e) => setEmail(e.target.value)}
+               />
+               <label className="formLabel" htmlFor="form3Example1w ">
+                 Email
+               </label>
+              </div>
+
+            <div className="form-outline">
+              <input
+                type="password"
+                id="form3Example1w"
+                className="form-control"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <label
+                className="formLabel"
+                htmlFor="form3Example1w"
+              >
+                Password
+              </label>
+            </div>
+
+            <div className="form-outline">
+              <input
+               type="text"
+               id="form3Example1w"
+               className="form-control"
+               onChange={(e) => setUsername(e.target.value)}
+               />
+              <label className="formLabel" htmlFor="form3Example1w">
+               Username
+              </label>
+            </div>
+
+            <div className="form-outline">
+                <button
+                  type="submit"
+                  className="button"
+                  onClick={handleSignup}
+                >
+                  Submit
+                </button>
+            </div>
+  
+      </div>
+
+    </div>
+  );
+}
+
+
+
+{/* <div className="signup">
       <input
         type="email"
         id="form3Example1w"
@@ -65,6 +150,4 @@ export default function Signup() {
       >
         Submit
       </button>
-    </div>
-  );
-}
+    </div> */}
