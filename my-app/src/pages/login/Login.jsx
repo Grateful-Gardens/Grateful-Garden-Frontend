@@ -1,5 +1,5 @@
 import { React, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import "./login.css";
 import AppContext from "../../context/appContext";
 
@@ -42,70 +42,145 @@ export default function Login({ setAuth }) {
   };
 
   return (
-    <div>
-      <section className="h-100 h-custom entire-section">
-        <div className="container pt-4 h-100">
-          <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col-lg-8 col-xl-6">
-              <div className="card rounded-3">
-                <img
-                  src="https://arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/GUE6GE2XMFGE3GVQWE7QAISGVA.jpg"
-                  className=" background-image"
-                  alt="Sample photo"
-                />
-                <div className="card-body p-4 p-md-5">
-                  <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 d-flex flex-column justify-content-center align-items-center login-text">
-                    Log In
-                  </h3>
+    <div className="page">
+      
 
-                  <form className="px-md-2 d-flex flex-column justify-content-center align-items-center">
-                    <div className="row mb-4 pb-2 pb-md-0 mb-md-5 d-flex flex-column justify-content-center align-items-center">
-                      <div className="col-md-6">
-                        <div className="form-outline">
-                          <input
-                            type="email"
-                            id="form3Example1w"
-                            className="form-control"
-                            onChange={(e) => setEmail(e.target.value)}
-                          />
-                          <label
-                            className="form-label mb-3"
-                            htmlFor="form3Example1w "
-                          >
-                            Email
-                          </label>
-                        </div>
-                        <div className="form-outline">
-                          <input
-                            type="password"
-                            id="form3Example1w"
-                            className="form-control"
-                            onChange={(e) => setPassword(e.target.value)}
-                          />
-                          <label
-                            className="form-label"
-                            htmlFor="form3Example1w"
-                          >
-                            Password
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="btn btn-success btn-lg mb-1"
-                      onClick={handleLogin}
-                    >
-                      Submit
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="left-side">
+        <div className="imageDiv">
         </div>
-      </section>
+      </div>
+
+      <div className="right-side">
+        <span className="logo">Grateful Gardens</span>
+        <div className="pageSwitcherL">
+              <NavLink
+                to="/login"
+                activeClassName="pageSwitcherItem-activeL"
+                className="pageSwitcherItemL"
+              >
+                Sign In
+              </NavLink>
+              <NavLink
+                exact
+                to="/signup"
+                activeClassName="pageSwitcherItem-activeL"
+                className="pageSwitcherItemL"
+              >
+                Sign Up
+              </NavLink>
+         </div>
+              <div className="form-outline">
+                <input
+                  type="email"
+                  id="form3Example1w"
+                  className="form-control"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <label
+                  className="formLabel"
+                  htmlFor="form3Example1w "
+                >
+                  Email
+                </label>
+              </div>
+
+            <div className="form-outline">
+              <input
+                type="password"
+                id="form3Example1w"
+                className="form-control"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <label
+                className="formLabel"
+                htmlFor="form3Example1w"
+              >
+                Password
+              </label>
+            </div>
+
+            <div className="form-outline">
+                <button
+                  type="submit"
+                  className="button"
+                  onClick={handleLogin}
+                >
+                  Submit
+                </button>
+            </div>
+  
+      </div>
+
     </div>
-  );
+
+
+
+
+
+  //   <div>
+  //     <section className="h-100 h-custom entire-section">
+  //       <div className="container pt-4 h-100">
+  //         <div className="row d-flex justify-content-center align-items-center h-100">
+  //           <div className="col-lg-8 col-xl-6">
+  //             <div className="card rounded-3">
+  //               <img
+  //                 src="https://arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/GUE6GE2XMFGE3GVQWE7QAISGVA.jpg"
+  //                 className=" background-image"
+  //                 alt="Sample photo"
+  //               />
+  //               <div className="card-body p-4 p-md-5">
+  //                 <h3 className="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 d-flex flex-column justify-content-center align-items-center login-text">
+  //                   Log In
+  //                 </h3>
+
+  //                 <form className="px-md-2 d-flex flex-column justify-content-center align-items-center">
+  //                   <div className="row mb-4 pb-2 pb-md-0 mb-md-5 d-flex flex-column justify-content-center align-items-center">
+  //                     <div className="col-md-6">
+  //                       <div className="form-outline">
+  //                         <input
+  //                           type="email"
+  //                           id="form3Example1w"
+  //                           className="form-control"
+  //                           onChange={(e) => setEmail(e.target.value)}
+  //                         />
+  //                         <label
+  //                           className="form-label mb-3"
+  //                           htmlFor="form3Example1w "
+  //                         >
+  //                           Email
+  //                         </label>
+  //                       </div>
+  //                       <div className="form-outline">
+  //                         <input
+  //                           type="password"
+  //                           id="form3Example1w"
+  //                           className="form-control"
+  //                           onChange={(e) => setPassword(e.target.value)}
+  //                         />
+  //                         <label
+  //                           className="form-label"
+  //                           htmlFor="form3Example1w"
+  //                         >
+  //                           Password
+  //                         </label>
+  //                       </div>
+  //                     </div>
+  //                   </div>
+
+  //                   <button
+  //                     type="submit"
+  //                     className="btn btn-success btn-lg mb-1"
+  //                     onClick={handleLogin}
+  //                   >
+  //                     Submit
+  //                   </button>
+  //                 </form>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </section>
+  //   </div>
+   );
 }
