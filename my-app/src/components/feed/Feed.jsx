@@ -14,6 +14,7 @@ export default function Feed({ userInfo }) {
       .then((data) => setPosts(data.data));
   }, []);
 
+  console.log(posts)
   return (
     <div className="feed">
       <div className="feedWrapper">

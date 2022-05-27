@@ -112,6 +112,7 @@ export default function Post({ post, posts, setPosts, userInfo }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post.description}</span>
+          <img className="postImg" src={post.upload} alt="" />
           <img className="postImg" src={post.image} alt="" />
           {/* <img className="postImg" src="https://www.northernbeachesreview.com.au/images/transform/v1/crop/frm/jess.wallace/8b0a371c-1e18-4bd5-bf78-0a4aed88cc6f.jpg/r0_0_7359_4906_w1200_h678_fmax.jpg" alt="" /> */}
         </div>
