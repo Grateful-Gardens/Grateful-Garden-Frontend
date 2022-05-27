@@ -35,12 +35,13 @@ export default function Signup() {
       
 
       <div className="left-side">
-        <div className="imageDiv">
-        </div>
       </div>
 
       <div className="right-side">
         <span className="logo">Grateful Gardens</span>
+        <div>
+        <span className="tagline">Food justice community</span>
+        </div>
         <div className="pageSwitcherS">
               <NavLink
                 to="/login"
