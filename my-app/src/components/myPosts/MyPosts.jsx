@@ -6,6 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Comments from "../comments/Comments.jsx";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function MyPosts({ post, posts, setPosts, setAllMyPosts, userInfo, allMyPosts}) {
   const [like, setLike] = useState(post.like_count);
@@ -105,11 +106,19 @@ export default function MyPosts({ post, posts, setPosts, setAllMyPosts, userInfo
         <div className="postBottom">
           <div className="postBottomLeft">
             <IconButton aria-label="delete">
-              <FavoriteBorderTwoToneIcon
-                htmlColor="#2e7865"
-                className="likeIcon"
-                onClick={likeHandler}
-              />
+            {!isLiked ? (
+                <FavoriteBorderTwoToneIcon
+                  htmlColor="#2e7865"
+                  className="likeIcon"
+                  onClick={likeHandler}
+                />
+              ) : (
+                <FavoriteIcon
+                  htmlColor="#2e7865"
+                  className="likeIcon"
+                  onClick={likeHandler}
+                />
+              )}
             </IconButton>
             <span className="postLikeCounter">{like} likes</span>
           </div>

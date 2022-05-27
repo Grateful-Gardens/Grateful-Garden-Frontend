@@ -13,6 +13,10 @@
   flex: 3;
 }
 
+.topbarLink:hover {
+  color:#e4e4e4;
+}
+
 .logo {
   font-size: 24px;
   margin-left: 20px;
@@ -53,7 +57,7 @@
   flex: 4;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: end;
   color: white;
 }
 
@@ -88,12 +92,18 @@
   font-size: 12px;
 }
 
+.friendBar {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
 .topbarImg {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
+  margin-right: 30px;
 }
 
 @media only screen and (max-width: 425px) {
